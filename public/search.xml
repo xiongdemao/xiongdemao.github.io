@@ -1132,9 +1132,9 @@ PATH (the directories the shell should search to find a command)
         
         <tags>
             
-            <tag> hexo </tag>
-            
             <tag> git </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -1163,9 +1163,9 @@ PATH (the directories the shell should search to find a command)
         
         <tags>
             
-            <tag> hexo </tag>
-            
             <tag> git </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -1390,7 +1390,7 @@ branch: 分支（User Pages为master，Project Pages为gh-pages）
 <p><img src="http://github.global.ssl.fastly.net/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Mark" title="GitHub Mark"></p>
 <p><a href="http://bruce-sha.github.io" target="_blank" rel="external">不如</a><br><img src="http://github.global.ssl.fastly.net/images/modules/logos_page/Octocat.png" alt="GitHub Octocat"></p>
 <p><a href="http://ibruce.info" target="_blank" rel="external">http://ibruce.info</a></p>
-<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#98;&#x75;&#46;&#114;&#117;&#64;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;">&#98;&#x75;&#46;&#114;&#117;&#64;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;</a>
+<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#98;&#x75;&#x2e;&#114;&#x75;&#64;&#113;&#113;&#x2e;&#99;&#111;&#x6d;">&#98;&#x75;&#x2e;&#114;&#x75;&#64;&#113;&#113;&#x2e;&#99;&#111;&#x6d;</a>
 
 <p>val s = “hello Markdown”<br>println( s )</p>
 <p>val s = “hello Markdown”<br>println( s )</p>

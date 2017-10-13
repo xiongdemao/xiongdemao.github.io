@@ -98,7 +98,7 @@ deploy:
   repository: 
       github: git@github.com:xiongdemao/xiongdemao.github.io.git
       coding: git@git.coding.net:xiongdemao/xiongdemao.coding.me.git,master
-      gitee:  git@gitee.com:XiongDeMiao/xiongdemiao.git
+      gitee:  git@gitee.com:XiongDeMiao/xiondemiao.git
   branch: master
        
        #coding: git@git.coding.net:alexpdh/myblog.git,master
