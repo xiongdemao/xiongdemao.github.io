@@ -1,0 +1,126 @@
+
+---
+title: ros：（2）ros节点
+date: 2017-11-13 21:08:00
+tags: [ros]
+categories: [ros]
+---
+# 图概念概述
+
+    Nodes:节点,一个节点即为一个可执行文件，它可以通过ROS与其它节点进行通信。
+
+    Messages:消息，消息是一种ROS数据类型，用于订阅或发布到一个话题。
+
+    Topics:话题,节点可以发布消息到话题，也可以订阅话题以接收消息。
+
+    Master:节点管理器，ROS名称服务 (比如帮助节点找到彼此)。
+
+    rosout: ROS中相当于stdout/stderr。
+
+    roscore: 主机+ rosout + 参数服务器 (参数服务器会在后面介绍)。 
+
+
+
+# 1.roscore
+
+roscore 是你在运行所有ROS程序前首先要运行的命令。 
+
+```
+kuo@kuo-Inspiron-7420:~/catkin_ws$ roscore
+```
+# 2.1使用rosnode
+
+rosnode 显示当前运行的ROS节点信息。rosnode list 指令列出活跃的节点:
+
+```
+kuo@kuo-Inspiron-7420:~$ rosnode list
+/rosout
+/turtlesim
+
+```
+# 2.1rosnode info 命令
+rosnode info 命令返回的是关于一个特定节点的信息。
+
+```
+kuo@kuo-Inspiron-7420:~$ rosnode info /rosout
+```
+```
+--------------------------------------------------------------------------------
+Node [/rosout]
+Publications: 
+ * /rosout_agg [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /rosout [unknown type]
+
+Services: 
+ * /rosout/set_logger_level
+ * /rosout/get_loggers
+
+
+contacting node http://kuo-Inspiron-7420:46315/ ...
+Pid: 5414
+
+```
+
+# 3.使用 rosrun
+
+```bash
+kuo@kuo-Inspiron-7420:~$ rosrun turtlesim turtlesim_node
+```
+出现以下信息：
+```
+[ INFO] [1506515421.527660398]: Starting turtlesim with node name /turtlesim
+[ INFO] [1506515421.540510002]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+```
+同时弹出以下窗口:
+![这里写图片描述](http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingNodes?action=AttachFile&do=get&target=turtlesim.png)
+
+
+在一个 新的终端:
+```
+$ rosnode list
+```
+你会看见类似于:
+```
+    /rosout
+    /turtlesim
+```
+# 4.ROS的一个强大特性就是你可以通过命令行重新配置名称
+
+记得首先回到rosrun turtlesim终端并使用`ctrl-C`
+现在让我们重新运行它，但是这一次使用Remapping Argument改变节点名称: 
+```
+kuo@kuo-Inspiron-7420:~$ rosrun turtlesim turtlesim_node __name:=my_turtle
+```
+此时再回到`rosnode list`端口，输入`rosnode list`会看到名字已经改了：
+```
+kuo@kuo-Inspiron-7420:~$ rosnode list
+/my_turtle  #注意，这里以前是turtlesim
+/rosout
+```
+
+你可以用`rosnode ping`测试这个节点：
+```
+kuo@kuo-Inspiron-7420:~$  rosnode ping my_turtle
+rosnode: node is [/my_turtle]
+pinging /my_turtle with a timeout of 3.0s
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=0.518084ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.244068ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.185894ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.127005ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=0.943899ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=0.998020ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=0.899076ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.173973ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.152992ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=0.983000ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.232862ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=0.945091ms
+xmlrpc reply from http://kuo-Inspiron-7420:39605/	time=1.293182ms
+^Cping average: 1.053627ms
+```
+
+来自：
+[理解 ROS节点](http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingNodes)
+本教程主要介绍 ROS 图（graph）概念 并讨论roscore、rosnode和 rosrun 命令行工具的使用。 

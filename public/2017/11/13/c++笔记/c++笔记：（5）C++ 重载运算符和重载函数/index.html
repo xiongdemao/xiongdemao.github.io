@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="加油，小伙儿" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="C++ 重载运算符和重载函数C++ 允许在同一作用域中的某个函数和运算符指定多个定义，分别称为函数重载和运算符重载。 重载声明是指一个与之前已经在该作用域内声明过的函数或方法具有相同名称的声明，但是它们的参数列表和定义（实现）不相同。 当您调用一个重载函数或重载运算符时，编译器通过把您所使用的参数类型与定义中的参数类型进行比较，决定选用最合适的定义。选择最合适的重载函数或重载运算符的过程，称为重载">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++笔记：（5）:C++ 重载运算符和重载函数">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/index.html">
+<meta property="og:site_name" content="加油，小伙儿">
+<meta property="og:description" content="C++ 重载运算符和重载函数C++ 允许在同一作用域中的某个函数和运算符指定多个定义，分别称为函数重载和运算符重载。 重载声明是指一个与之前已经在该作用域内声明过的函数或方法具有相同名称的声明，但是它们的参数列表和定义（实现）不相同。 当您调用一个重载函数或重载运算符时，编译器通过把您所使用的参数类型与定义中的参数类型进行比较，决定选用最合适的定义。选择最合适的重载函数或重载运算符的过程，称为重载">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-13T13:22:45.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++笔记：（5）:C++ 重载运算符和重载函数">
+<meta name="twitter:description" content="C++ 重载运算符和重载函数C++ 允许在同一作用域中的某个函数和运算符指定多个定义，分别称为函数重载和运算符重载。 重载声明是指一个与之前已经在该作用域内声明过的函数或方法具有相同名称的声明，但是它们的参数列表和定义（实现）不相同。 当您调用一个重载函数或重载运算符时，编译器通过把您所使用的参数类型与定义中的参数类型进行比较，决定选用最合适的定义。选择最合适的重载函数或重载运算符的过程，称为重载">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/"/>
+
+
+
+
+
+  <title>c++笔记：（5）:C++ 重载运算符和重载函数 | 加油，小伙儿</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">加油，小伙儿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="熊的猫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.ico.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="加油，小伙儿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c++笔记：（5）:C++ 重载运算符和重载函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T21:11:58+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="C-重载运算符和重载函数"><a href="#C-重载运算符和重载函数" class="headerlink" title="C++ 重载运算符和重载函数"></a>C++ 重载运算符和重载函数</h2><p>C++ 允许在同一作用域中的某个函数和运算符指定多个定义，分别称为<strong>函数重载</strong>和<strong>运算符重载</strong>。</p>
+<p>重载声明是指一个与之前已经在该作用域内声明过的函数或方法具有相同名称的声明，但是它们的参数列表和定义（实现）不相同。</p>
+<p>当您调用一个重载函数或重载运算符时，编译器通过把您所使用的参数类型与定义中的参数类型进行比较，决定选用最合适的定义。选择最合适的重载函数或重载运算符的过程，称为重载决策。</p>
+<h2 id="C-中的函数重载"><a href="#C-中的函数重载" class="headerlink" title="C++ 中的函数重载"></a>C++ 中的函数重载</h2><p>在同一个作用域内，可以声明几个功能类似的同名函数，但是这些同名函数的形式参数（指参数的个数、类型或者顺序）必须不同。您不能仅通过返回类型的不同来重载函数。</p>
+<p>下面的实例中，同名函数 print() 被用于输出不同的数据类型：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class printData </div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      void print(int i) &#123;</div><div class="line">        cout &lt;&lt; &quot;Printing int: &quot; &lt;&lt; i &lt;&lt; endl;</div><div class="line">      &#125;</div><div class="line"> </div><div class="line">      void print(double  f) &#123;</div><div class="line">        cout &lt;&lt; &quot;Printing float: &quot; &lt;&lt; f &lt;&lt; endl;</div><div class="line">      &#125;</div><div class="line"> </div><div class="line">      void print(char* c) &#123;</div><div class="line">        cout &lt;&lt; &quot;Printing character: &quot; &lt;&lt; c &lt;&lt; endl;</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">   printData pd;</div><div class="line"> </div><div class="line">   // Call print to print integer</div><div class="line">   pd.print(5);</div><div class="line">   // Call print to print float</div><div class="line">   pd.print(500.263);</div><div class="line">   // Call print to print character</div><div class="line">   pd.print(&quot;Hello C++&quot;);</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Printing int: 5</div><div class="line">Printing float: 500.263</div><div class="line">Printing character: Hello C++</div></pre></td></tr></table></figure></p>
+<h2 id="C-中的运算符重载"><a href="#C-中的运算符重载" class="headerlink" title="C++ 中的运算符重载"></a>C++ 中的运算符重载</h2><p>您可以重定义或重载大部分 C++ 内置的运算符。这样，您就能使用自定义类型的运算符。</p>
+<p>重载的运算符是带有特殊名称的函数，函数名是由关键字 operator 和其后要重载的运算符符号构成的。与其他函数一样，重载运算符有一个返回类型和一个参数列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Box operator+(const Box&amp;);</div></pre></td></tr></table></figure></p>
+<p>声明加法运算符用于把两个 Box 对象相加，返回最终的 Box 对象。大多数的重载运算符可被定义为<strong>普通的非成员函数</strong>或者被定义为<strong>类成员函数</strong>。如果我们定义上面的函数为类的非成员函数，那么我们需要为每次操作传递两个参数，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Box operator+(const Box&amp;, const Box&amp;);</div></pre></td></tr></table></figure></p>
+<p>下面的实例使用成员函数演示了运算符重载的概念。在这里，对象作为参数进行传递，对象的属性使用 this 运算符进行访问，如下所示：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line"> </div><div class="line">      double getVolume(void)</div><div class="line">      &#123;</div><div class="line">         return length * breadth * height;</div><div class="line">      &#125;</div><div class="line">      void setLength( double len )</div><div class="line">      &#123;</div><div class="line">          length = len;</div><div class="line">      &#125;</div><div class="line"> </div><div class="line">      void setBreadth( double bre )</div><div class="line">      &#123;</div><div class="line">          breadth = bre;</div><div class="line">      &#125;</div><div class="line"> </div><div class="line">      void setHeight( double hei )</div><div class="line">      &#123;</div><div class="line">          height = hei;</div><div class="line">      &#125;</div><div class="line">      // 重载 + 运算符，用于把两个 Box 对象相加</div><div class="line">      Box operator+(const Box&amp; b)</div><div class="line">      &#123;</div><div class="line">         Box box;</div><div class="line">         box.length = this-&gt;length + b.length;</div><div class="line">         box.breadth = this-&gt;breadth + b.breadth;</div><div class="line">         box.height = this-&gt;height + b.height;</div><div class="line">         return box;</div><div class="line">      &#125;</div><div class="line">   private:</div><div class="line">      double length;      // 长度</div><div class="line">      double breadth;     // 宽度</div><div class="line">      double height;      // 高度</div><div class="line">&#125;;</div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Box Box1;                // 声明 Box1，类型为 Box</div><div class="line">   Box Box2;                // 声明 Box2，类型为 Box</div><div class="line">   Box Box3;                // 声明 Box3，类型为 Box</div><div class="line">   double volume = 0.0;     // 把体积存储在该变量中</div><div class="line"> </div><div class="line">   // Box1 详述</div><div class="line">   Box1.setLength(6.0); </div><div class="line">   Box1.setBreadth(7.0); </div><div class="line">   Box1.setHeight(5.0);</div><div class="line"> </div><div class="line">   // Box2 详述</div><div class="line">   Box2.setLength(12.0); </div><div class="line">   Box2.setBreadth(13.0); </div><div class="line">   Box2.setHeight(10.0);</div><div class="line"> </div><div class="line">   // Box1 的体积</div><div class="line">   volume = Box1.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Volume of Box1 : &quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"> </div><div class="line">   // Box2 的体积</div><div class="line">   volume = Box2.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Volume of Box2 : &quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"> </div><div class="line">   // 把两个对象相加，得到 Box3</div><div class="line">   Box3 = Box1 + Box2;</div><div class="line"> </div><div class="line">   // Box3 的体积</div><div class="line">   volume = Box3.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Volume of Box3 : &quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Volume of Box1 : 210</div><div class="line">Volume of Box2 : 1560</div><div class="line">Volume of Box3 : 5400</div></pre></td></tr></table></figure></p>
+<h2 id="可重载运算符-不可重载运算符"><a href="#可重载运算符-不可重载运算符" class="headerlink" title="可重载运算符/不可重载运算符"></a>可重载运算符/不可重载运算符</h2><p>下面是可重载的运算符列表：<br>|双目算术运算符     |+ (加)，-(减)，<em>(乘)，/(除)，% (取模)|<br>|—|—|<br>|关系运算符     |==(等于)，!= (不等于)，&lt; (小于)，&gt; (大于&gt;，&lt;=(小于等于)，&gt;=(大于等于)|<br>|逻辑运算符     |||(逻辑或)，&amp;&amp;(逻辑与)，!(逻辑非)|<br>|单目运算符     |+ (正)，-(负)，</em>(指针)，&amp;(取地址)|<br>|自增自减运算符     |++(自增)，–(自减)|<br>|位运算符 |    | (按位或)，&amp; (按位与)，~(按位取反)，^(按位异或),，&lt;&lt; (左移)，&gt;&gt;(右移)|<br>|赋值运算符|     =, +=, -=, <em>=, /= , % = , &amp;=, |=, ^=, &lt;&lt;=, &gt;&gt;=|<br>|空间申请与释放     |new, delete, new[ ] , delete[]|<br>|其他运算符 |    ()(函数调用)，-&gt;(成员访问)，-&gt;</em>(成员指针访问)，,(逗号)，[](下标)|</p>
+<p>下面是不可重载的运算符列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.：成员访问运算符</div><div class="line">.*, -&gt;*：成员指针访问运算符</div><div class="line">::：域运算符</div><div class="line">sizeof：长度运算符</div><div class="line">?:：条件运算符</div><div class="line">#： 预处理符号</div></pre></td></tr></table></figure></p>
+<h2 id="运算符重载实例"><a href="#运算符重载实例" class="headerlink" title="运算符重载实例"></a>运算符重载实例</h2><p>下面提供了各种运算符重载的实例，帮助您更好地理解重载的概念。<br>序号    运算符和实例</p>
+<blockquote>
+<p>1    一元运算符重载<br>2    二元运算符重载<br>3    关系运算符重载<br>4    输入/输出运算符重载<br>5    ++ 和 – 运算符重载<br>6    赋值运算符重载<br>7    函数调用运算符 () 重载<br>8    下标运算符 [] 重载<br>9    类成员访问运算符 -&gt; 重载</p>
+</blockquote>
+<h3 id="1-C-一元运算符重载"><a href="#1-C-一元运算符重载" class="headerlink" title="1.C++ 一元运算符重载"></a>1.C++ 一元运算符重载</h3><p>一元运算符只对一个操作数进行操作，下面是一元运算符的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">递增运算符（ ++ ）和递减运算符（ -- ）</div><div class="line">一元减运算符，即负号（ - ）</div><div class="line">逻辑非运算符（ ! ）</div></pre></td></tr></table></figure></p>
+<p>一元运算符通常出现在它们所操作的对象的左边，比如 <code>!obj</code>、<code>-obj</code> 和<code>++obj</code>，但有时它们也可以作为后缀，比如 <code>obj++</code> 或<code>obj--</code>。</p>
+<p>下面的实例演示了如何重载一元减运算符（ - ）。<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Distance</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int feet;             // 0 到无穷</div><div class="line">      int inches;           // 0 到 12</div><div class="line">   public:</div><div class="line">      // 所需的构造函数</div><div class="line">      Distance()&#123;</div><div class="line">         feet = 0;</div><div class="line">         inches = 0;</div><div class="line">      &#125;</div><div class="line">      Distance(int f, int i)&#123;</div><div class="line">         feet = f;</div><div class="line">         inches = i;</div><div class="line">      &#125;</div><div class="line">      // 显示距离的方法</div><div class="line">      void displayDistance()</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt; &quot;F: &quot; &lt;&lt; feet &lt;&lt; &quot; I:&quot; &lt;&lt; inches &lt;&lt;endl;</div><div class="line">      &#125;</div><div class="line">      // 重载负运算符（ - ）</div><div class="line">      Distance operator- ()  </div><div class="line">      &#123;</div><div class="line">         feet = -feet;</div><div class="line">         inches = -inches;</div><div class="line">         return Distance(feet, inches);</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   Distance D1(11, 10), D2(-5, 11);</div><div class="line"> </div><div class="line">   -D1;                     // 取相反数</div><div class="line">   D1.displayDistance();    // 距离 D1</div><div class="line"> </div><div class="line">   -D2;                     // 取相反数</div><div class="line">   D2.displayDistance();    // 距离 D2</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">F: -11 I:-10</div><div class="line">F: 5 I:-11</div></pre></td></tr></table></figure></p>
+<h3 id="2-C-二元运算符重载"><a href="#2-C-二元运算符重载" class="headerlink" title="2.C++ 二元运算符重载"></a>2.C++ 二元运算符重载</h3><p>二元运算符需要两个参数，下面是二元运算符的实例。我们平常使用的加运算符（ + ）、减运算符（ - ）、乘运算符（ * ）和除运算符（ / ）都属于二元运算符。就像加(+)运算符。</p>
+<p>下面的实例演示了如何重载加运算符（ + ）。类似地，您也可以尝试重载减运算符（ - ）和除运算符（ / ）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   double length;      // 长度</div><div class="line">   double breadth;     // 宽度</div><div class="line">   double height;      // 高度</div><div class="line">public:</div><div class="line"> </div><div class="line">   double getVolume(void)</div><div class="line">   &#123;</div><div class="line">      return length * breadth * height;</div><div class="line">   &#125;</div><div class="line">   void setLength( double len )</div><div class="line">   &#123;</div><div class="line">       length = len;</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   void setBreadth( double bre )</div><div class="line">   &#123;</div><div class="line">       breadth = bre;</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   void setHeight( double hei )</div><div class="line">   &#123;</div><div class="line">       height = hei;</div><div class="line">   &#125;</div><div class="line">   // 重载 + 运算符，用于把两个 Box 对象相加</div><div class="line">   Box operator+(const Box&amp; b)</div><div class="line">   &#123;</div><div class="line">      Box box;</div><div class="line">      box.length = this-&gt;length + b.length;</div><div class="line">      box.breadth = this-&gt;breadth + b.breadth;</div><div class="line">      box.height = this-&gt;height + b.height;</div><div class="line">      return box;</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Box Box1;                // 声明 Box1，类型为 Box</div><div class="line">   Box Box2;                // 声明 Box2，类型为 Box</div><div class="line">   Box Box3;                // 声明 Box3，类型为 Box</div><div class="line">   double volume = 0.0;     // 把体积存储在该变量中</div><div class="line"> </div><div class="line">   // Box1 详述</div><div class="line">   Box1.setLength(6.0); </div><div class="line">   Box1.setBreadth(7.0); </div><div class="line">   Box1.setHeight(5.0);</div><div class="line"> </div><div class="line">   // Box2 详述</div><div class="line">   Box2.setLength(12.0); </div><div class="line">   Box2.setBreadth(13.0); </div><div class="line">   Box2.setHeight(10.0);</div><div class="line"> </div><div class="line">   // Box1 的体积</div><div class="line">   volume = Box1.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Volume of Box1 : &quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"> </div><div class="line">   // Box2 的体积</div><div class="line">   volume = Box2.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Volume of Box2 : &quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"> </div><div class="line">   // 把两个对象相加，得到 Box3</div><div class="line">   Box3 = Box1 + Box2;</div><div class="line"> </div><div class="line">   // Box3 的体积</div><div class="line">   volume = Box3.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Volume of Box3 : &quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Volume of Box1 : 210</div><div class="line">Volume of Box2 : 1560</div><div class="line">Volume of Box3 : 5400</div></pre></td></tr></table></figure></p>
+<h3 id="3-C-关系运算符重载"><a href="#3-C-关系运算符重载" class="headerlink" title="3.C++ 关系运算符重载"></a>3.C++ 关系运算符重载</h3><p>C++ 语言支持各种关系运算符<code>（ &lt; 、 &gt; 、 &lt;= 、 &gt;= 、 == 等等）</code>，它们可用于比较 C++ 内置的数据类型。</p>
+<p>您可以重载任何一个关系运算符，重载后的关系运算符可用于比较类的对象。</p>
+<p>下面的实例演示了如何重载 &lt; 运算符，类似地，您也可以尝试重载其他的关系运算符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Distance</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int feet;             // 0 到无穷</div><div class="line">      int inches;           // 0 到 12</div><div class="line">   public:</div><div class="line">      // 所需的构造函数</div><div class="line">      Distance()&#123;</div><div class="line">         feet = 0;</div><div class="line">         inches = 0;</div><div class="line">      &#125;</div><div class="line">      Distance(int f, int i)&#123;</div><div class="line">         feet = f;</div><div class="line">         inches = i;</div><div class="line">      &#125;</div><div class="line">      // 显示距离的方法</div><div class="line">      void displayDistance()</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt; &quot;F: &quot; &lt;&lt; feet &lt;&lt; &quot; I:&quot; &lt;&lt; inches &lt;&lt;endl;</div><div class="line">      &#125;</div><div class="line">      // 重载负运算符（ - ）</div><div class="line">      Distance operator- ()  </div><div class="line">      &#123;</div><div class="line">         feet = -feet;</div><div class="line">         inches = -inches;</div><div class="line">         return Distance(feet, inches);</div><div class="line">      &#125;</div><div class="line">      // 重载小于运算符（ &lt; ）</div><div class="line">      bool operator &lt;(const Distance&amp; d)</div><div class="line">      &#123;</div><div class="line">         if(feet &lt; d.feet)</div><div class="line">         &#123;</div><div class="line">            return true;</div><div class="line">         &#125;</div><div class="line">         if(feet == d.feet &amp;&amp; inches &lt; d.inches)</div><div class="line">         &#123;</div><div class="line">            return true;</div><div class="line">         &#125;</div><div class="line">         return false;</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   Distance D1(11, 10), D2(5, 11);</div><div class="line"> </div><div class="line">   if( D1 &lt; D2 )</div><div class="line">   &#123;</div><div class="line">      cout &lt;&lt; &quot;D1 is less than D2 &quot; &lt;&lt; endl;</div><div class="line">   &#125;</div><div class="line">   else</div><div class="line">   &#123;</div><div class="line">      cout &lt;&lt; &quot;D2 is less than D1 &quot; &lt;&lt; endl;</div><div class="line">   &#125;</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">D2 is less than D1</div></pre></td></tr></table></figure></p>
+<h3 id="4-C-输入-输出运算符重载"><a href="#4-C-输入-输出运算符重载" class="headerlink" title="4.C++ 输入/输出运算符重载"></a>4.C++ 输入/输出运算符重载</h3><p>C++ 能够使用流提取运算符 <code>&gt;&gt;</code> 和流插入运算符 <code>&lt;&lt;</code> 来输入和输出内置的数据类型。您可以重载流提取运算符和流插入运算符来操作对象等用户自定义的数据类型。</p>
+<p>在这里，有一点很重要，我们需要把运算符重载函数声明为类的友元函数，这样我们就能不用创建对象而直接调用函数。</p>
+<p>下面的实例演示了如何重载提取运算符 <code>&gt;&gt;</code> 和插入运算符 <code>&lt;&lt;</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Distance</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int feet;             // 0 到无穷</div><div class="line">      int inches;           // 0 到 12</div><div class="line">   public:</div><div class="line">      // 所需的构造函数</div><div class="line">      Distance()&#123;</div><div class="line">         feet = 0;</div><div class="line">         inches = 0;</div><div class="line">      &#125;</div><div class="line">      Distance(int f, int i)&#123;</div><div class="line">         feet = f;</div><div class="line">         inches = i;</div><div class="line">      &#125;</div><div class="line">      friend ostream &amp;operator&lt;&lt;( ostream &amp;output, </div><div class="line">                                       const Distance &amp;D )</div><div class="line">      &#123; </div><div class="line">         output &lt;&lt; &quot;F : &quot; &lt;&lt; D.feet &lt;&lt; &quot; I : &quot; &lt;&lt; D.inches;</div><div class="line">         return output;            </div><div class="line">      &#125;</div><div class="line"></div><div class="line">      friend istream &amp;operator&gt;&gt;( istream  &amp;input, Distance &amp;D )</div><div class="line">      &#123; </div><div class="line">         input &gt;&gt; D.feet &gt;&gt; D.inches;</div><div class="line">         return input;            </div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   Distance D1(11, 10), D2(5, 11), D3;</div><div class="line"></div><div class="line">   cout &lt;&lt; &quot;Enter the value of object : &quot; &lt;&lt; endl;</div><div class="line">   cin &gt;&gt; D3;</div><div class="line">   cout &lt;&lt; &quot;First Distance : &quot; &lt;&lt; D1 &lt;&lt; endl;</div><div class="line">   cout &lt;&lt; &quot;Second Distance :&quot; &lt;&lt; D2 &lt;&lt; endl;</div><div class="line">   cout &lt;&lt; &quot;Third Distance :&quot; &lt;&lt; D3 &lt;&lt; endl;</div><div class="line"></div><div class="line"></div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$./a.out</div><div class="line">Enter the value of object :</div><div class="line">70</div><div class="line">10</div><div class="line">First Distance : F : 11 I : 10</div><div class="line">Second Distance :F : 5 I : 11</div><div class="line">Third Distance :F : 70 I : 10</div></pre></td></tr></table></figure></p>
+<h3 id="5-C-和-–-运算符重载"><a href="#5-C-和-–-运算符重载" class="headerlink" title="5.C++ ++ 和 – 运算符重载"></a>5.C++ ++ 和 – 运算符重载</h3><p>递增运算符（ ++ ）和递减运算符（ – ）是 C++ 语言中两个重要的一元运算符。</p>
+<p>下面的实例演示了如何重载递增运算符（ ++ ），包括前缀和后缀两种用法。类似地，您也可以尝试重载递减运算符（ - - ）。<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Time</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int hours;             // 0 到 23</div><div class="line">      int minutes;           // 0 到 59</div><div class="line">   public:</div><div class="line">      // 所需的构造函数</div><div class="line">      Time()&#123;</div><div class="line">         hours = 0;</div><div class="line">         minutes = 0;</div><div class="line">      &#125;</div><div class="line">      Time(int h, int m)&#123;</div><div class="line">         hours = h;</div><div class="line">         minutes = m;</div><div class="line">      &#125;</div><div class="line">      // 显示时间的方法</div><div class="line">      void displayTime()</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt; &quot;H: &quot; &lt;&lt; hours &lt;&lt; &quot; M:&quot; &lt;&lt; minutes &lt;&lt;endl;</div><div class="line">      &#125;</div><div class="line">      // 重载前缀递增运算符（ ++ ）</div><div class="line">      Time operator++ ()  </div><div class="line">      &#123;</div><div class="line">         ++minutes;          // 对象加 1</div><div class="line">         if(minutes &gt;= 60)  </div><div class="line">         &#123;</div><div class="line">            ++hours;</div><div class="line">            minutes -= 60;</div><div class="line">         &#125;</div><div class="line">         return Time(hours, minutes);</div><div class="line">      &#125;</div><div class="line">      // 重载后缀递增运算符（ ++ ）</div><div class="line">      Time operator++( int )         </div><div class="line">      &#123;</div><div class="line">         // 保存原始值</div><div class="line">         Time T(hours, minutes);</div><div class="line">         // 对象加 1</div><div class="line">         ++minutes;                    </div><div class="line">         if(minutes &gt;= 60)</div><div class="line">         &#123;</div><div class="line">            ++hours;</div><div class="line">            minutes -= 60;</div><div class="line">         &#125;</div><div class="line">         // 返回旧的原始值</div><div class="line">         return T; </div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   Time T1(11, 59), T2(10,40);</div><div class="line"> </div><div class="line">   ++T1;                    // T1 加 1</div><div class="line">   T1.displayTime();        // 显示 T1</div><div class="line">   ++T1;                    // T1 再加 1</div><div class="line">   T1.displayTime();        // 显示 T1</div><div class="line"> </div><div class="line">   T2++;                    // T2 加 1</div><div class="line">   T2.displayTime();        // 显示 T2</div><div class="line">   T2++;                    // T2 再加 1</div><div class="line">   T2.displayTime();        // 显示 T2</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">H: 12 M:0</div><div class="line">H: 12 M:1</div><div class="line">H: 10 M:41</div><div class="line">H: 10 M:42</div></pre></td></tr></table></figure></p>
+<h3 id="6-C-赋值运算符重载"><a href="#6-C-赋值运算符重载" class="headerlink" title="6.C++ 赋值运算符重载"></a>6.C++ 赋值运算符重载</h3><p>就像其他运算符一样，您可以重载赋值运算符（ = ），用于创建一个对象，比如拷贝构造函数。</p>
+<p>下面的实例演示了如何重载赋值运算符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Distance</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int feet;             // 0 到无穷</div><div class="line">      int inches;           // 0 到 12</div><div class="line">   public:</div><div class="line">      // 所需的构造函数</div><div class="line">      Distance()&#123;</div><div class="line">         feet = 0;</div><div class="line">         inches = 0;</div><div class="line">      &#125;</div><div class="line">      Distance(int f, int i)&#123;</div><div class="line">         feet = f;</div><div class="line">         inches = i;</div><div class="line">      &#125;</div><div class="line">      void operator=(const Distance &amp;D )</div><div class="line">      &#123; </div><div class="line">         feet = D.feet;</div><div class="line">         inches = D.inches;</div><div class="line">      &#125;</div><div class="line">      // 显示距离的方法</div><div class="line">      void displayDistance()</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt; &quot;F: &quot; &lt;&lt; feet &lt;&lt;  &quot; I:&quot; &lt;&lt;  inches &lt;&lt; endl;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   Distance D1(11, 10), D2(5, 11);</div><div class="line"></div><div class="line">   cout &lt;&lt; &quot;First Distance : &quot;; </div><div class="line">   D1.displayDistance();</div><div class="line">   cout &lt;&lt; &quot;Second Distance :&quot;; </div><div class="line">   D2.displayDistance();</div><div class="line"></div><div class="line">   // 使用赋值运算符</div><div class="line">   D1 = D2;</div><div class="line">   cout &lt;&lt; &quot;First Distance :&quot;; </div><div class="line">   D1.displayDistance();</div><div class="line"></div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">First Distance : F: 11 I:10</div><div class="line">Second Distance :F: 5 I:11</div><div class="line">First Distance :F: 5 I:11</div></pre></td></tr></table></figure></p>
+<h3 id="7-C-函数调用运算符-重载"><a href="#7-C-函数调用运算符-重载" class="headerlink" title="7.C++ 函数调用运算符 () 重载"></a>7.C++ 函数调用运算符 () 重载</h3><p>函数调用运算符 () 可以被重载用于类的对象。当重载 () 时，您不是创造了一种新的调用函数的方式，相反地，这是创建一个可以传递任意数目参数的运算符函数。</p>
+<p>下面的实例演示了如何重载函数调用运算符 ()。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Distance</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int feet;             // 0 到无穷</div><div class="line">      int inches;           // 0 到 12</div><div class="line">   public:</div><div class="line">      // 所需的构造函数</div><div class="line">      Distance()&#123;</div><div class="line">         feet = 0;</div><div class="line">         inches = 0;</div><div class="line">      &#125;</div><div class="line">      Distance(int f, int i)&#123;</div><div class="line">         feet = f;</div><div class="line">         inches = i;</div><div class="line">      &#125;</div><div class="line">      // 重载函数调用运算符</div><div class="line">      Distance operator()(int a, int b, int c)</div><div class="line">      &#123;</div><div class="line">         Distance D;</div><div class="line">         // 进行随机计算</div><div class="line">         D.feet = a + c + 10;</div><div class="line">         D.inches = b + c + 100 ;</div><div class="line">         return D;</div><div class="line">      &#125;</div><div class="line">      // 显示距离的方法</div><div class="line">      void displayDistance()</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt; &quot;F: &quot; &lt;&lt; feet &lt;&lt;  &quot; I:&quot; &lt;&lt;  inches &lt;&lt; endl;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   Distance D1(11, 10), D2;</div><div class="line"></div><div class="line">   cout &lt;&lt; &quot;First Distance : &quot;; </div><div class="line">   D1.displayDistance();</div><div class="line"></div><div class="line">   D2 = D1(10, 10, 10); // invoke operator()</div><div class="line">   cout &lt;&lt; &quot;Second Distance :&quot;; </div><div class="line">   D2.displayDistance();</div><div class="line"></div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">First Distance : F: 11 I:10</div><div class="line">Second Distance :F: 30 I:120</div></pre></td></tr></table></figure></p>
+<h3 id="8-C-下标运算符-重载"><a href="#8-C-下标运算符-重载" class="headerlink" title="8.C++ 下标运算符 [] 重载"></a>8.C++ 下标运算符 [] 重载</h3><p>下标操作符 [] 通常用于访问数组元素。重载该运算符用于增强操作 C++ 数组的功能。</p>
+<p>下面的实例演示了如何重载下标运算符 []。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line">const int SIZE = 10;</div><div class="line"></div><div class="line">class safearay</div><div class="line">&#123;</div><div class="line">   private:</div><div class="line">      int arr[SIZE];</div><div class="line">   public:</div><div class="line">      safearay() </div><div class="line">      &#123;</div><div class="line">         register int i;</div><div class="line">         for(i = 0; i &lt; SIZE; i++)</div><div class="line">         &#123;</div><div class="line">           arr[i] = i;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      int&amp; operator[](int i)</div><div class="line">      &#123;</div><div class="line">          if( i &gt; SIZE )</div><div class="line">          &#123;</div><div class="line">              cout &lt;&lt; &quot;索引超过最大值&quot; &lt;&lt;endl; </div><div class="line">              // 返回第一个元素</div><div class="line">              return arr[0];</div><div class="line">          &#125;</div><div class="line">          return arr[i];</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">   safearay A;</div><div class="line"></div><div class="line">   cout &lt;&lt; &quot;A[2] 的值为 : &quot; &lt;&lt; A[2] &lt;&lt;endl;</div><div class="line">   cout &lt;&lt; &quot;A[5] 的值为 : &quot; &lt;&lt; A[5]&lt;&lt;endl;</div><div class="line">   cout &lt;&lt; &quot;A[12] 的值为 : &quot; &lt;&lt; A[12]&lt;&lt;endl;</div><div class="line"></div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ g++ -o test test.cpp</div><div class="line">$ ./test </div><div class="line">A[2] 的值为 : 2</div><div class="line">A[5] 的值为 : 5</div><div class="line">A[12] 的值为 : 索引超过最大值</div><div class="line">0</div></pre></td></tr></table></figure></p>
+<h3 id="9-C-类成员访问运算符-gt-重载"><a href="#9-C-类成员访问运算符-gt-重载" class="headerlink" title="9.C++ 类成员访问运算符 -&gt; 重载"></a>9.C++ 类成员访问运算符 -&gt; 重载</h3><p>类成员访问运算符（ -&gt; ）可以被重载，但它较为麻烦。它被定义用于为一个类赋予”指针”行为。运算符 -&gt; 必须是一个成员函数。如果使用了 -&gt; 运算符，返回类型必须是指针或者是类的对象。</p>
+<p>运算符 -&gt; 通常与指针引用运算符 * 结合使用，用于实现”智能指针”的功能。这些指针是行为与正常指针相似的对象，唯一不同的是，当您通过指针访问对象时，它们会执行其他的任务。比如，当指针销毁时，或者当指针指向另一个对象时，会自动删除对象。</p>
+<p>间接引用运算符 -&gt; 可被定义为一个一元后缀运算符。也就是说，给出一个类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Ptr&#123;</div><div class="line">   //...</div><div class="line">   X * operator-&gt;();</div><div class="line">&#125;;</div><div class="line"></div><div class="line">类 Ptr 的对象可用于访问类 X 的成员，使用方式与指针的用法十分相似。例如：</div><div class="line"></div><div class="line">void f(Ptr p )</div><div class="line">&#123;</div><div class="line">   p-&gt;m = 10 ; // (p.operator-&gt;())-&gt;m = 10</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>语句<code>p-&gt;m</code>被解释为 <code>(p.operator-&gt;())-&gt;m</code>。同样地，下面的实例演示了如何重载类成员访问运算符 <code>-&gt;</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;vector&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">// 假设一个实际的类</div><div class="line">class Obj &#123;</div><div class="line">   static int i, j;</div><div class="line">public:</div><div class="line">   void f() const &#123; cout &lt;&lt; i++ &lt;&lt; endl; &#125;</div><div class="line">   void g() const &#123; cout &lt;&lt; j++ &lt;&lt; endl; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 静态成员定义</div><div class="line">int Obj::i = 10;</div><div class="line">int Obj::j = 12;</div><div class="line"></div><div class="line">// 为上面的类实现一个容器</div><div class="line">class ObjContainer &#123;</div><div class="line">   vector&lt;Obj*&gt; a;</div><div class="line">public:</div><div class="line">   void add(Obj* obj)</div><div class="line">   &#123; </div><div class="line">      a.push_back(obj);  // 调用向量的标准方法</div><div class="line">   &#125;</div><div class="line">   friend class SmartPointer;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 实现智能指针，用于访问类 Obj 的成员</div><div class="line">class SmartPointer &#123;</div><div class="line">   ObjContainer oc;</div><div class="line">   int index;</div><div class="line">public:</div><div class="line">   SmartPointer(ObjContainer&amp; objc)</div><div class="line">   &#123; </div><div class="line">       oc = objc;</div><div class="line">       index = 0;</div><div class="line">   &#125;</div><div class="line">   // 返回值表示列表结束</div><div class="line">   bool operator++() // 前缀版本</div><div class="line">   &#123; </div><div class="line">     if(index &gt;= oc.a.size()) return false;</div><div class="line">     if(oc.a[++index] == 0) return false;</div><div class="line">     return true;</div><div class="line">   &#125;</div><div class="line">   bool operator++(int) // 后缀版本</div><div class="line">   &#123; </div><div class="line">      return operator++();</div><div class="line">   &#125;</div><div class="line">   // 重载运算符 -&gt;</div><div class="line">   Obj* operator-&gt;() const </div><div class="line">   &#123;</div><div class="line">     if(!oc.a[index])</div><div class="line">     &#123;</div><div class="line">        cout &lt;&lt; &quot;Zero value&quot;;</div><div class="line">        return (Obj*)0;</div><div class="line">     &#125;</div><div class="line">     return oc.a[index];</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main() &#123;</div><div class="line">   const int sz = 10;</div><div class="line">   Obj o[sz];</div><div class="line">   ObjContainer oc;</div><div class="line">   for(int i = 0; i &lt; sz; i++)</div><div class="line">   &#123;</div><div class="line">       oc.add(&amp;o[i]);</div><div class="line">   &#125;</div><div class="line">   SmartPointer sp(oc); // 创建一个迭代器</div><div class="line">   do &#123;</div><div class="line">      sp-&gt;f(); // 智能指针调用</div><div class="line">      sp-&gt;g();</div><div class="line">   &#125; while(sp++);</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">10</div><div class="line">12</div><div class="line">11</div><div class="line">13</div><div class="line">12</div><div class="line">14</div><div class="line">13</div><div class="line">15</div><div class="line">14</div><div class="line">16</div><div class="line">15</div><div class="line">17</div><div class="line">16</div><div class="line">18</div><div class="line">17</div><div class="line">19</div><div class="line">18</div><div class="line">20</div><div class="line">19</div><div class="line">21</div></pre></td></tr></table></figure></p>
+<p>转自：<a href="http://www.runoob.com/cplusplus/cpp-overloading.html" target="_blank" rel="external">C++ 重载运算符和重载函数</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/c++笔记/c++笔记：（4）C++ 继承/" rel="next" title="c++笔记：（4）:C++ 继承">
+                <i class="fa fa-chevron-left"></i> c++笔记：（4）:C++ 继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/随笔/tack笔记/" rel="prev" title="tack笔记">
+                tack笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/favicon.ico.png"
+               alt="熊的猫" />
+          <p class="site-author-name" itemprop="name">熊的猫</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是“熊的猫”的博客，在这里，将记录我的学习历程。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiongdemao" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://translate.google.cn/" title="谷歌翻译" target="_blank">谷歌翻译</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-重载运算符和重载函数"><span class="nav-number">1.</span> <span class="nav-text">C++ 重载运算符和重载函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-中的函数重载"><span class="nav-number">2.</span> <span class="nav-text">C++ 中的函数重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-中的运算符重载"><span class="nav-number">3.</span> <span class="nav-text">C++ 中的运算符重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可重载运算符-不可重载运算符"><span class="nav-number">4.</span> <span class="nav-text">可重载运算符/不可重载运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符重载实例"><span class="nav-number">5.</span> <span class="nav-text">运算符重载实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-C-一元运算符重载"><span class="nav-number">5.1.</span> <span class="nav-text">1.C++ 一元运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-C-二元运算符重载"><span class="nav-number">5.2.</span> <span class="nav-text">2.C++ 二元运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-C-关系运算符重载"><span class="nav-number">5.3.</span> <span class="nav-text">3.C++ 关系运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-C-输入-输出运算符重载"><span class="nav-number">5.4.</span> <span class="nav-text">4.C++ 输入/输出运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-C-和-–-运算符重载"><span class="nav-number">5.5.</span> <span class="nav-text">5.C++ ++ 和 – 运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-C-赋值运算符重载"><span class="nav-number">5.6.</span> <span class="nav-text">6.C++ 赋值运算符重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-C-函数调用运算符-重载"><span class="nav-number">5.7.</span> <span class="nav-text">7.C++ 函数调用运算符 () 重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-C-下标运算符-重载"><span class="nav-number">5.8.</span> <span class="nav-text">8.C++ 下标运算符 [] 重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-C-类成员访问运算符-gt-重载"><span class="nav-number">5.9.</span> <span class="nav-text">9.C++ 类成员访问运算符 -> 重载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">熊的猫</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    &nbsp|&nbsp本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  &nbsp|&nbsp本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xiongdemao.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/';
+          this.page.identifier = '2017/11/13/c++笔记/c++笔记：（5）C++ 重载运算符和重载函数/';
+          this.page.title = 'c++笔记：（5）:C++ 重载运算符和重载函数';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xiongdemao.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

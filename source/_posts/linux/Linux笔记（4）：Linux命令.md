@@ -3,7 +3,7 @@ layout: '[poto]'
 title: Linux笔记（4）：Linux命令
 date: 2017-08-7 19:48:58
 tags: [笔记,ubuntu,linux]
-categories: [Linux] #Linux笔记（4）：Linux命令
+categories: [Ubuntu] #Linux笔记（4）：Linux命令
 ---
 [TOC]
 # 1.命令使用方法

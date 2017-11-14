@@ -3,7 +3,7 @@ layout: '[poto]'
 title: Linux笔记（3）：文件和目录
 date: 2017-08-7 17:48:58
 tags: [笔记,ubuntu,linux]
-categories: [Linux] #Linux笔记（3）：文件和目录
+categories: [Ubuntu] #Linux笔记（3）：文件和目录
 ---
 
 

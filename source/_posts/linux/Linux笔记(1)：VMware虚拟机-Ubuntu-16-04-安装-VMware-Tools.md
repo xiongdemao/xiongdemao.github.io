@@ -2,7 +2,7 @@
 title: Linux笔记(1)：VMware虚拟机 Ubuntu 16.04 安装 VMware Tools
 date: 2017-08-06 20:33:30
 tags: [笔记,WMware,Ubuntu]
-categories: [Linux] #Linux笔记(1)：VMware虚拟机 Ubuntu 16.04 安装 VMware Tools
+categories: [Ubuntu] #Linux笔记(1)：VMware虚拟机 Ubuntu 16.04 安装 VMware Tools
 ---
 在VMware中装完Ubuntu后，为了与host之间互传文件，需要安装VMware tools。
 ## 1、解决路径问题

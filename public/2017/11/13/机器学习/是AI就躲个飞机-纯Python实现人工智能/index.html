@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,机器学习," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="加油，小伙儿" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="转自：是AI就躲个飞机-纯Python实现人工智能 很久以前微信流行过一个小游戏：打飞机，这个游戏简单又无聊。在2017年来临之际，我就实现一个超级弱智的人工智能（AI），这货可以躲避从屏幕上方飞来的飞机。本帖只使用纯Python实现，不依赖任何高级库。 本文的AI基于neuro-evolution，首先简单科普一下neuro-evolution。从neuro-evolution这个名字就可以看出">
+<meta name="keywords" content="笔记,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="是AI就躲个飞机-纯Python实现人工智能">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/index.html">
+<meta property="og:site_name" content="加油，小伙儿">
+<meta property="og:description" content="转自：是AI就躲个飞机-纯Python实现人工智能 很久以前微信流行过一个小游戏：打飞机，这个游戏简单又无聊。在2017年来临之际，我就实现一个超级弱智的人工智能（AI），这货可以躲避从屏幕上方飞来的飞机。本帖只使用纯Python实现，不依赖任何高级库。 本文的AI基于neuro-evolution，首先简单科普一下neuro-evolution。从neuro-evolution这个名字就可以看出">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://blog.topspeedsnail.com/wp-content/uploads/2016/12/ai1.gif">
+<meta property="og:image" content="http://blog.topspeedsnail.com/wp-content/uploads/2016/12/ai2.gif">
+<meta property="og:updated_time" content="2017-11-14T13:49:59.299Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="是AI就躲个飞机-纯Python实现人工智能">
+<meta name="twitter:description" content="转自：是AI就躲个飞机-纯Python实现人工智能 很久以前微信流行过一个小游戏：打飞机，这个游戏简单又无聊。在2017年来临之际，我就实现一个超级弱智的人工智能（AI），这货可以躲避从屏幕上方飞来的飞机。本帖只使用纯Python实现，不依赖任何高级库。 本文的AI基于neuro-evolution，首先简单科普一下neuro-evolution。从neuro-evolution这个名字就可以看出">
+<meta name="twitter:image" content="http://blog.topspeedsnail.com/wp-content/uploads/2016/12/ai1.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/"/>
+
+
+
+
+
+  <title>是AI就躲个飞机-纯Python实现人工智能 | 加油，小伙儿</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">加油，小伙儿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="熊的猫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.ico.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="加油，小伙儿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">是AI就躲个飞机-纯Python实现人工智能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T21:06:58+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转自：<a href="http://blog.csdn.net/u014365862/article/details/54380422" target="_blank" rel="external">是AI就躲个飞机-纯Python实现人工智能</a></p>
+<p>很久以前微信流行过一个小游戏：打飞机，这个游戏简单又无聊。在2017年来临之际，我就实现一个超级弱智的人工智能（AI），这货可以躲避从屏幕上方飞来的飞机。本帖只使用纯Python实现，不依赖任何高级库。</p>
+<p>本文的AI基于<a href="https://en.wikipedia.org/wiki/Neuroevolution" target="_blank" rel="external">neuro-evolution</a>，首先简单科普一下neuro-evolution。从neuro-evolution这个名字就可以看出它由两部分组成-neuro and evolution，它是使用进化算法（遗传算法是进化算法的一种）提升人工神经网络的机器学习技术，其实就是用进化算法改进并选出最优的神经网络。</p>
+<p>   <a href="http://blog.topspeedsnail.com/archives/10709" target="_blank" rel="external">使用TPOT自动选择scikit-learn机器学习模型和参数</a></p>
+<h2 id="neuro-evolution"><a href="#neuro-evolution" class="headerlink" title="neuro-evolution"></a>neuro-evolution</h2><p>定义一些变量：</p>
+<figure class="highlight plain"><figcaption><span>view plain copy</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import math  </div><div class="line">import random  </div><div class="line">   </div><div class="line"># 神经网络3层, 1个隐藏层; 4个input和1个output  </div><div class="line">network = [4, [16], 1]  </div><div class="line"># 遗传算法相关  </div><div class="line">population = 50  </div><div class="line">elitism = 0.2   </div><div class="line">random_behaviour = 0.1  </div><div class="line">mutation_rate = 0.5  </div><div class="line">mutation_range = 2  </div><div class="line">historic = 0  </div><div class="line">low_historic = False  </div><div class="line">score_sort = -1  </div><div class="line">n_child = 1</div></pre></td></tr></table></figure>
+<p>定义神经网络：</p>
+<figure class="highlight plain"><figcaption><span>view plain copy</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 激活函数  </div><div class="line">def sigmoid(z):  </div><div class="line">    return 1.0/(1.0+math.exp(-z))  </div><div class="line"># random number  </div><div class="line">def random_clamped():  </div><div class="line">    return random.random()*2-1  </div><div class="line">   </div><div class="line"># &quot;神经元&quot;  </div><div class="line">class Neuron():  </div><div class="line">    def __init__(self):  </div><div class="line">        self.biase = 0  </div><div class="line">        self.weights = []  </div><div class="line">   </div><div class="line">    def init_weights(self, n):  </div><div class="line">        self.weights = []  </div><div class="line">        for i in range(n):  </div><div class="line">            self.weights.append(random_clamped())  </div><div class="line">    def __repr__(self):  </div><div class="line">        return &apos;Neuron weight size:&#123;&#125;  biase value:&#123;&#125;&apos;.format(len(self.weights), self.biase)  </div><div class="line">   </div><div class="line"># 层  </div><div class="line">class Layer():  </div><div class="line">    def __init__(self, index):  </div><div class="line">        self.index = index  </div><div class="line">        self.neurons = []  </div><div class="line">   </div><div class="line">    def init_neurons(self, n_neuron, n_input):  </div><div class="line">        self.neurons = []  </div><div class="line">        for i in range(n_neuron):  </div><div class="line">            neuron = Neuron()  </div><div class="line">            neuron.init_weights(n_input)  </div><div class="line">            self.neurons.append(neuron)  </div><div class="line">   </div><div class="line">    def __repr__(self):  </div><div class="line">        return &apos;Layer ID:&#123;&#125;  Layer neuron size:&#123;&#125;&apos;.format(self.index, len(self.neurons))  </div><div class="line">   </div><div class="line"># 神经网络  </div><div class="line">class NeuroNetwork():  </div><div class="line">    def __init__(self):  </div><div class="line">        self.layers = []  </div><div class="line">   </div><div class="line">    # input:输入层神经元数 hiddens:隐藏层 output:输出层神经元数  </div><div class="line">    def init_neuro_network(self, input, hiddens , output):  </div><div class="line">        index = 0  </div><div class="line">        previous_neurons = 0  </div><div class="line">        # input  </div><div class="line">        layer = Layer(index)  </div><div class="line">        layer.init_neurons(input, previous_neurons)  </div><div class="line">        previous_neurons = input  </div><div class="line">        self.layers.append(layer)  </div><div class="line">        index += 1  </div><div class="line">        # hiddens  </div><div class="line">        for i in range(len(hiddens)):  </div><div class="line">            layer = Layer(index)  </div><div class="line">            layer.init_neurons(hiddens[i], previous_neurons)  </div><div class="line">            previous_neurons = hiddens[i]  </div><div class="line">            self.layers.append(layer)  </div><div class="line">            index += 1  </div><div class="line">        # output  </div><div class="line">        layer = Layer(index)  </div><div class="line">        layer.init_neurons(output, previous_neurons)  </div><div class="line">        self.layers.append(layer)  </div><div class="line">   </div><div class="line">    def get_weights(self):  </div><div class="line">        data = &#123; &apos;network&apos;:[], &apos;weights&apos;:[] &#125;  </div><div class="line">        for layer in self.layers:  </div><div class="line">            data[&apos;network&apos;].append(len(layer.neurons))  </div><div class="line">            for neuron in layer.neurons:  </div><div class="line">                for weight in neuron.weights:  </div><div class="line">                    data[&apos;weights&apos;].append(weight)  </div><div class="line">        return data  </div><div class="line">   </div><div class="line">    def set_weights(self, data):  </div><div class="line">        previous_neurons = 0  </div><div class="line">        index = 0  </div><div class="line">        index_weights = 0  </div><div class="line">   </div><div class="line">        self.layers = []  </div><div class="line">        for i in data[&apos;network&apos;]:  </div><div class="line">            layer = Layer(index)  </div><div class="line">            layer.init_neurons(i, previous_neurons)  </div><div class="line">            for j in range(len(layer.neurons)):  </div><div class="line">                for k in range(len(layer.neurons[j].weights)):  </div><div class="line">                    layer.neurons[j].weights[k] = data[&apos;weights&apos;][index_weights]  </div><div class="line">                    index_weights += 1  </div><div class="line">            previous_neurons = i  </div><div class="line">            index += 1  </div><div class="line">            self.layers.append(layer)  </div><div class="line">   </div><div class="line">    # 输入游戏环境中的一些条件(如敌机位置), 返回要执行的操作  </div><div class="line">    def feed_forward(self, inputs):  </div><div class="line">        for i in range(len(inputs)):  </div><div class="line">            self.layers[0].neurons[i].biase = inputs[i]  </div><div class="line">   </div><div class="line">        prev_layer = self.layers[0]  </div><div class="line">        for i in range(len(self.layers)):  </div><div class="line">            # 第一层没有weights  </div><div class="line">            if i == 0:  </div><div class="line">                continue  </div><div class="line">            for j in range(len(self.layers[i].neurons)):  </div><div class="line">                sum = 0  </div><div class="line">                for k in range(len(prev_layer.neurons)):  </div><div class="line">                    sum += prev_layer.neurons[k].biase * self.layers[i].neurons[j].weights[k]  </div><div class="line">                self.layers[i].neurons[j].biase = sigmoid(sum)  </div><div class="line">            prev_layer = self.layers[i]  </div><div class="line">   </div><div class="line">        out = []  </div><div class="line">        last_layer = self.layers[-1]  </div><div class="line">        for i in range(len(last_layer.neurons)):  </div><div class="line">            out.append(last_layer.neurons[i].biase)  </div><div class="line">        return out  </div><div class="line">   </div><div class="line">    def print_info(self):  </div><div class="line">        for layer in self.layers:  </div><div class="line">            print(layer)</div></pre></td></tr></table></figure>
+<p>遗传算法：</p>
+<figure class="highlight plain"><figcaption><span>view plain copy</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># &quot;基因组&quot;  </div><div class="line">class Genome():  </div><div class="line">    def __init__(self, score, network_weights):  </div><div class="line">        self.score = score  </div><div class="line">        self.network_weights = network_weights  </div><div class="line">   </div><div class="line">class Generation():  </div><div class="line">    def __init__(self):  </div><div class="line">        self.genomes = []  </div><div class="line">   </div><div class="line">    def add_genome(self, genome):  </div><div class="line">        i = 0  </div><div class="line">        for i in range(len(self.genomes)):  </div><div class="line">            if score_sort &lt; 0:  </div><div class="line">                if genome.score &gt; self.genomes[i].score:  </div><div class="line">                    break  </div><div class="line">            else:  </div><div class="line">                if genome.score &lt; self.genomes[i].score:  </div><div class="line">                    break  </div><div class="line">        self.genomes.insert(i, genome)  </div><div class="line">   </div><div class="line">        # 杂交+突变  </div><div class="line">    def breed(self, genome1, genome2, n_child):  </div><div class="line">        datas = []  </div><div class="line">        for n in range(n_child):  </div><div class="line">            data = genome1  </div><div class="line">            for i in range(len(genome2.network_weights[&apos;weights&apos;])):  </div><div class="line">                if random.random() &lt;= 0.5:  </div><div class="line">                    data.network_weights[&apos;weights&apos;][i] = genome2.network_weights[&apos;weights&apos;][i]  </div><div class="line">   </div><div class="line">            for i in range(len(data.network_weights[&apos;weights&apos;])):  </div><div class="line">                if random.random() &lt;= mutation_rate:  </div><div class="line">                    data.network_weights[&apos;weights&apos;][i] += random.random() * mutation_range * 2 - mutation_range  </div><div class="line">            datas.append(data)  </div><div class="line">        return datas  </div><div class="line">   </div><div class="line">        # 生成下一代  </div><div class="line">    def generate_next_generation(self):  </div><div class="line">        nexts = []  </div><div class="line">        for i in range(round(elitism*population)):  </div><div class="line">            if len(nexts) &lt; population:  </div><div class="line">                nexts.append(self.genomes[i].network_weights)  </div><div class="line">   </div><div class="line">        for i in range(round(random_behaviour*population)):  </div><div class="line">            n = self.genomes[0].network_weights  </div><div class="line">            for k in range(len(n[&apos;weights&apos;])):  </div><div class="line">                n[&apos;weights&apos;][k] = random_clamped()  </div><div class="line">            if len(nexts) &lt; population:  </div><div class="line">                nexts.append(n)  </div><div class="line">   </div><div class="line">        max_n = 0  </div><div class="line">        while True:  </div><div class="line">            for i in range(max_n):  </div><div class="line">                childs = self.breed(self.genomes[i], self.genomes[max_n], n_child if n_child &gt; 0 else 1)  </div><div class="line">                for c in range(len(childs)):  </div><div class="line">                    nexts.append(childs[c].network_weights)  </div><div class="line">                    if len(nexts) &gt;= population:  </div><div class="line">                        return nexts  </div><div class="line">            max_n += 1  </div><div class="line">            if max_n &gt;= len(self.genomes)-1:  </div><div class="line">                max_n = 0</div></pre></td></tr></table></figure>
+<p>NeuroEvolution：</p>
+<figure class="highlight plain"><figcaption><span>view plain copy</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class Generations():  </div><div class="line">    def __init__(self):  </div><div class="line">        self.generations = []  </div><div class="line">   </div><div class="line">    def first_generation(self):  </div><div class="line">        out = []  </div><div class="line">        for i in range(population):  </div><div class="line">            nn = NeuroNetwork()  </div><div class="line">            nn.init_neuro_network(network[0], network[1], network[2])  </div><div class="line">            out.append(nn.get_weights())  </div><div class="line">        self.generations.append(Generation())  </div><div class="line">        return out  </div><div class="line">          </div><div class="line">    def next_generation(self):  </div><div class="line">        if len(self.generations) == 0:  </div><div class="line">            return False  </div><div class="line">   </div><div class="line">        gen = self.generations[-1].generate_next_generation()  </div><div class="line">        self.generations.append(Generation())  </div><div class="line">        return gen  </div><div class="line">   </div><div class="line">    def add_genome(self, genome):  </div><div class="line">        if len(self.generations) == 0:  </div><div class="line">            return False  </div><div class="line">   </div><div class="line">        return self.generations[-1].add_genome(genome)  </div><div class="line">   </div><div class="line">class NeuroEvolution():  </div><div class="line">    def __init__(self):  </div><div class="line">        self.generations = Generations()  </div><div class="line">   </div><div class="line">    def restart(self):  </div><div class="line">        self.generations = Generations()  </div><div class="line">   </div><div class="line">    def next_generation(self):  </div><div class="line">        networks = []  </div><div class="line">        if len(self.generations.generations) == 0:  </div><div class="line">            networks = self.generations.first_generation()  </div><div class="line">        else:  </div><div class="line">            networks = self.generations.next_generation()  </div><div class="line">   </div><div class="line">        nn = []  </div><div class="line">        for i in range(len(networks)):  </div><div class="line">            n = NeuroNetwork()  </div><div class="line">            n.set_weights(networks[i])  </div><div class="line">            nn.append(n)  </div><div class="line">   </div><div class="line">        if low_historic:  </div><div class="line">            if len(self.generations.generations) &gt;= 2:  </div><div class="line">                genomes = self.generations.generations[len(self.generations.generations) - 2].genomes  </div><div class="line">                for i in range(genomes):  </div><div class="line">                    genomes[i].network = None  </div><div class="line">   </div><div class="line">        if historic != -1:  </div><div class="line">            if len(self.generations.generations) &gt; historic+1:  </div><div class="line">                del self.generations.generations[0:len(self.generations.generations)-(historic+1)]  </div><div class="line">   </div><div class="line">        return nn  </div><div class="line">   </div><div class="line">    def network_score(self, score, network):  </div><div class="line">        self.generations.add_genome(Genome(score, network.get_weights()))</div></pre></td></tr></table></figure>
+<p>是AI就躲个飞机<br><figure class="highlight plain"><figcaption><span>view plain copy</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import pygame  </div><div class="line">import sys  </div><div class="line">from pygame.locals import *  </div><div class="line">import random  </div><div class="line">import math  </div><div class="line">   </div><div class="line">import neuro_evolution  </div><div class="line">   </div><div class="line">BACKGROUND = (200, 200, 200)  </div><div class="line">SCREEN_SIZE = (320, 480)  </div><div class="line">   </div><div class="line">class Plane():  </div><div class="line">    def __init__(self, plane_image):  </div><div class="line">        self.plane_image = plane_image  </div><div class="line">        self.rect = plane_image.get_rect()  </div><div class="line">   </div><div class="line">        self.width = self.rect[2]  </div><div class="line">        self.height = self.rect[3]  </div><div class="line">        self.x = SCREEN_SIZE[0]/2 - self.width/2  </div><div class="line">        self.y = SCREEN_SIZE[1] - self.height  </div><div class="line">   </div><div class="line">        self.move_x = 0  </div><div class="line">        self.speed = 2  </div><div class="line">   </div><div class="line">        self.alive = True  </div><div class="line">   </div><div class="line">    def update(self):  </div><div class="line">        self.x += self.move_x * self.speed  </div><div class="line">   </div><div class="line">    def draw(self, screen):  </div><div class="line">        screen.blit(self.plane_image, (self.x, self.y, self.width, self.height))  </div><div class="line">   </div><div class="line">    def is_dead(self, enemes):  </div><div class="line">        if self.x &lt; -self.width or self.x + self.width &gt; SCREEN_SIZE[0]+self.width:  </div><div class="line">            return True  </div><div class="line">   </div><div class="line">        for eneme in enemes:  </div><div class="line">            if self.collision(eneme):  </div><div class="line">                return True  </div><div class="line">        return False  </div><div class="line">   </div><div class="line">    def collision(self, eneme):  </div><div class="line">        if not (self.x &gt; eneme.x + eneme.width or self.x + self.width &lt; eneme.x or self.y &gt; eneme.y + eneme.height or self.y + self.height &lt; eneme.y):  </div><div class="line">            return True  </div><div class="line">        else:  </div><div class="line">            return False  </div><div class="line">   </div><div class="line">    def get_inputs_values(self, enemes, input_size=4):  </div><div class="line">        inputs = []  </div><div class="line">   </div><div class="line">        for i in range(input_size):  </div><div class="line">            inputs.append(0.0)  </div><div class="line">   </div><div class="line">        inputs[0] = (self.x*1.0 / SCREEN_SIZE[0])  </div><div class="line">        index = 1  </div><div class="line">        for eneme in enemes:  </div><div class="line">            inputs[index] = eneme.x*1.0 / SCREEN_SIZE[0]  </div><div class="line">            index += 1  </div><div class="line">            inputs[index] = eneme.y*1.0 / SCREEN_SIZE[1]  </div><div class="line">            index += 1  </div><div class="line">        #if len(enemes) &gt; 0:  </div><div class="line">            #distance = math.sqrt(math.pow(enemes[0].x + enemes[0].width/2 - self.x + self.width/2, 2) + math.pow(enemes[0].y + enemes[0].height/2 - self.y + self.height/2, 2));  </div><div class="line">        if len(enemes) &gt; 0 and self.x &lt; enemes[0].x:  </div><div class="line">            inputs[index] = -1.0  </div><div class="line">            index += 1  </div><div class="line">        else:  </div><div class="line">            inputs[index] = 1.0  </div><div class="line">   </div><div class="line">        return inputs  </div><div class="line">   </div><div class="line">class Enemy():  </div><div class="line">    def __init__(self, enemy_image):  </div><div class="line">        self.enemy_image = enemy_image  </div><div class="line">        self.rect = enemy_image.get_rect()  </div><div class="line">   </div><div class="line">        self.width = self.rect[2]  </div><div class="line">        self.height = self.rect[3]  </div><div class="line">        self.x = random.choice(range(0, int(SCREEN_SIZE[0] - self.width/2), 71))  </div><div class="line">        self.y = 0  </div><div class="line">   </div><div class="line">    def update(self):  </div><div class="line">        self.y += 6  </div><div class="line">   </div><div class="line">    def draw(self, screen):  </div><div class="line">        screen.blit(self.enemy_image, (self.x, self.y, self.width, self.height))  </div><div class="line">   </div><div class="line">    def is_out(self):  </div><div class="line">        return True if self.y &gt;= SCREEN_SIZE[1] else False  </div><div class="line">   </div><div class="line">class Game():  </div><div class="line">    def __init__(self):  </div><div class="line">        pygame.init()  </div><div class="line">        self.screen = pygame.display.set_mode(SCREEN_SIZE)  </div><div class="line">        self.clock = pygame.time.Clock()  </div><div class="line">        pygame.display.set_caption(&apos;是AI就躲个飞机&apos;)  </div><div class="line">   </div><div class="line">        self.ai = neuro_evolution.NeuroEvolution()  </div><div class="line">        self.generation = 0  </div><div class="line">   </div><div class="line">        self.max_enemes = 1  </div><div class="line">                # 加载飞机、敌机图片  </div><div class="line">        self.plane_image = pygame.image.load(&apos;plane.png&apos;).convert_alpha()  </div><div class="line">        self.enemy_image = pygame.image.load(&apos;enemy.png&apos;).convert_alpha()  </div><div class="line">   </div><div class="line">    def start(self):  </div><div class="line">        self.score = 0  </div><div class="line">        self.planes = []  </div><div class="line">        self.enemes = []  </div><div class="line">   </div><div class="line">        self.gen = self.ai.next_generation()  </div><div class="line">        for i in range(len(self.gen)):  </div><div class="line">            plane = Plane(self.plane_image)  </div><div class="line">            self.planes.append(plane)  </div><div class="line">   </div><div class="line">        self.generation += 1  </div><div class="line">        self.alives = len(self.planes)  </div><div class="line">   </div><div class="line">    def update(self, screen):  </div><div class="line">        for i in range(len(self.planes)):  </div><div class="line">            if self.planes[i].alive:  </div><div class="line">                inputs = self.planes[i].get_inputs_values(self.enemes)  </div><div class="line">                res = self.gen[i].feed_forward(inputs)  </div><div class="line">                if res[0] &lt; 0.45:  </div><div class="line">                    self.planes[i].move_x = -1  </div><div class="line">                elif res[0] &gt; 0.55:  </div><div class="line">                    self.planes[i].move_x = 1  </div><div class="line">   </div><div class="line">   </div><div class="line">                self.planes[i].update()  </div><div class="line">                self.planes[i].draw(screen)  </div><div class="line">   </div><div class="line">                if self.planes[i].is_dead(self.enemes) == True:  </div><div class="line">                    self.planes[i].alive = False  </div><div class="line">                    self.alives -= 1  </div><div class="line">                    self.ai.network_score(self.score, self.gen[i])  </div><div class="line">                    if self.is_ai_all_dead():  </div><div class="line">                        self.start()  </div><div class="line">   </div><div class="line">          </div><div class="line">        self.gen_enemes()  </div><div class="line">   </div><div class="line">        for i in range(len(self.enemes)):  </div><div class="line">            self.enemes[i].update()  </div><div class="line">            self.enemes[i].draw(screen)  </div><div class="line">            if self.enemes[i].is_out():  </div><div class="line">                del self.enemes[i]  </div><div class="line">                break  </div><div class="line">   </div><div class="line">        self.score += 1  </div><div class="line">   </div><div class="line">        print(&quot;alive:&#123;&#125;, generation:&#123;&#125;, score:&#123;&#125;&quot;.format(self.alives, self.generation, self.score), end=&apos;\r&apos;)  </div><div class="line">   </div><div class="line">    def run(self, FPS=1000):  </div><div class="line">        while True:  </div><div class="line">            for event in pygame.event.get():  </div><div class="line">                if event.type == QUIT:  </div><div class="line">                    pygame.quit()  </div><div class="line">                    sys.exit()  </div><div class="line">   </div><div class="line">            self.screen.fill(BACKGROUND)  </div><div class="line">   </div><div class="line">            self.update(self.screen)  </div><div class="line">   </div><div class="line">            pygame.display.update()  </div><div class="line">            self.clock.tick(FPS)  </div><div class="line">   </div><div class="line">    def gen_enemes(self):  </div><div class="line">        if len(self.enemes) &lt; self.max_enemes:  </div><div class="line">            enemy = Enemy(self.enemy_image)  </div><div class="line">            self.enemes.append(enemy)  </div><div class="line">   </div><div class="line">    def is_ai_all_dead(self):  </div><div class="line">        for plane in self.planes:  </div><div class="line">            if plane.alive:  </div><div class="line">                return False  </div><div class="line">        return True  </div><div class="line">   </div><div class="line">   </div><div class="line">game = Game()  </div><div class="line">game.start()  </div><div class="line">game.run()</div></pre></td></tr></table></figure></p>
+<h2 id="AI的工作逻辑"><a href="#AI的工作逻辑" class="headerlink" title="AI的工作逻辑"></a>AI的工作逻辑</h2><p>假设你是AI，你首先繁殖一个种群（50个个体），开始的个体大都是歪瓜裂枣（上来就被敌机撞）。但是，即使是歪瓜裂枣也有表现好的，在下一代，你会使用这些表现好的再繁殖一个种群，经过代代相传，存活下来的个体会越来越优秀。其实就是仿达尔文进化论，种群-&gt;自然选择-&gt;优秀个体-&gt;杂交、变异-&gt;种群-&gt;循环n世代。</p>
+<p>ai开始时候的表现：<br><img src="http://blog.topspeedsnail.com/wp-content/uploads/2016/12/ai1.gif" alt="是AI就躲个飞机 - 纯Python实现人工智能图片被拉扁了 sorry"></p>
+<p>经过几百代之后，ai开始娱乐的躲飞机：</p>
+<p><img src="http://blog.topspeedsnail.com/wp-content/uploads/2016/12/ai2.gif" alt="是AI就躲个飞机 - 纯Python实现人工智能"></p>
+<p>代码：<a href="https://github.com/xiongdemao/py_game_AI_plane.git" target="_blank" rel="external">https://github.com/xiongdemao/py_game_AI_plane.git</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/导航/利用视觉和deep learning做自主导航/" rel="next" title="机器人的自主定位导航">
+                <i class="fa fa-chevron-left"></i> 机器人的自主定位导航
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/机器学习/opencv安装问题`ippicv_linux_20140513.tgz...`/" rel="prev" title="opencv安装问题`ippicv_linux_20140513.tgz...`">
+                opencv安装问题`ippicv_linux_20140513.tgz...` <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/favicon.ico.png"
+               alt="熊的猫" />
+          <p class="site-author-name" itemprop="name">熊的猫</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是“熊的猫”的博客，在这里，将记录我的学习历程。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiongdemao" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://translate.google.cn/" title="谷歌翻译" target="_blank">谷歌翻译</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#neuro-evolution"><span class="nav-number">1.</span> <span class="nav-text">neuro-evolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI的工作逻辑"><span class="nav-number">2.</span> <span class="nav-text">AI的工作逻辑</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">熊的猫</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    &nbsp|&nbsp本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  &nbsp|&nbsp本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xiongdemao.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/';
+          this.page.identifier = '2017/11/13/机器学习/是AI就躲个飞机-纯Python实现人工智能/';
+          this.page.title = '是AI就躲个飞机-纯Python实现人工智能';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xiongdemao.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

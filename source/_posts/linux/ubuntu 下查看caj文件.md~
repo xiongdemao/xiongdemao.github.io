@@ -1,0 +1,55 @@
+---
+title: ubuntu 下查看caj文件
+date: 2017-10-06 20:33:30
+tags: [笔记,Ubuntu]
+categories: [Ubuntu] 
+---
+
+
+知网的学位论文只有CAJ版，而我又偏偏使用Ubuntu，所以就有了这篇文章。
+
+ 
+
+前端时间发现第一种方法在ubuntu 16 上不行， 请使用第二种方法。
+
+ 
+
+# 第一种方法：
+
+环境：Ubuntu 14.04 64bit
+
+1.安装wine：
+```
+sudo apt-get install wine
+```
+2.下载caj6.0绿色版CAJViewer6.0_green.rar： http://pan.baidu.com/s/1mhwEvAK
+
+3.解压到目录cajviewer6.0：
+```
+mkdir cajviewer6.0
+unrar x CAJViewer6.0_green.rar cajviewer6.0
+```
+4.运行：
+```
+sudo chmod u+x CAJViewer.exe //修改权限
+wine CAJViewer.exe 
+```
+
+
+ 
+
+
+ 
+
+===============================================================
+
+# 第二种方法：
+
+前段时间发现用Ubuntu16.04上边的这种不行了，请使用下边的方法：
+
+下载链接： http://pan.baidu.com/s/1jIqHxLs
+
+　　　　　　或 http://download.csdn.net/detail/arhaiyun/5457947
+
+压缩包里边有安装说明，这里边是7.2 的cajviewer版本。亲测可用。
+

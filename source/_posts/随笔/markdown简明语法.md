@@ -3,7 +3,7 @@ layout: '[layout]'
 title: markdown简明语法 #文章页面上的显示名称，可以任意修改，不会出现在URL中
 date: 2017-07-20 13:21:22 #文章生成时间，一般不改，当然也可以任意修改
 categories: [markdown]#文章分类目录，可以为空，注意:后面有个空格
-tags: [技术,markdown,格式]#文章标签，可空，多标签请用格式[tag1,tag2,tag3]，注意:后面有个空格
+tags: [技术,markdown,格式]
 ---
 
 ---
@@ -87,6 +87,8 @@ println( s )
 
 <!-- 注释 -->
 
+
+
 Markdown中的转义字符为\，转义的有：
 \\ 反斜杠
 \` 反引号
@@ -105,3 +107,26 @@ Markdown中的转义字符为\，转义的有：
 || 1900 || -10 || 25 ||
 || 1910 || -15 || 30 ||
 || 1920 || -10 || 32 ||
+
+
+<font face="黑体">我是黑体字</font>
+<font face="微软雅黑">我是微软雅黑</font>
+<font face="STCAIYUN">我是华文彩云</font>
+<font color=#0099ff size=12 face="黑体">黑体</font>
+<font color=#00ffff size=3>null</font>
+<font color=gray size=5>gray(灰)</font>
+
+<font color=red size=5>red(红)</font>
+<font color=white size=5>white(白)</font>white(白)
+<font color=black size=5>black(黑)</font>
+<font color=green size=5>green(绿)</font>
+<font color=yellow size=5>yellow(黄)</font>
+<font color=blue size=5>blue(蓝)</font>
+<font color=purple size=5>purple(紫)</font>
+<font color=brown size=5>brown(棕)</font>
+<font color=tan size=5>tan(褐色)</font>
+<font color=syan size=5>syan(青色) </font>
+
+
+
+  跳转到[目录](#in)

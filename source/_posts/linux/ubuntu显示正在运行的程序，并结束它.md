@@ -1,0 +1,68 @@
+---
+title: ubuntu显示正在运行的程序，并结束它
+date: 2017-10-07 20:33:30
+tags: [笔记,Ubuntu]
+categories: [Ubuntu] 
+---
+
+```
+top  //显示正在运行的程序
+kill 2951 //QQ的PID
+```
+```
+kuo@kuo-Inspiron-7420:~$ top
+
+top - 22:17:51 up  6:15,  2 users,  load average: 1.27, 1.06, 1.04
+Tasks: 253 total,   1 running, 252 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  7.9 us,  7.5 sy,  0.0 ni, 84.0 id,  0.6 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   3903164 total,  3734824 used,   168340 free,    47180 buffers
+KiB Swap:  7811068 total,    87292 used,  7723776 free.  1018796 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND     
+ 3422 kuo       20   0 2686968  35252  12816 S  22.6  0.9  36:56.74 Tencentdl.+ 
+ 2863 kuo       20   0   12988  10152   1820 S  11.6  0.3  17:13.79 wineserver  
+ 2653 kuo       20   0 3468032 1.095g 127236 S  10.3 29.4  40:19.60 firefox     
+ 2951 kuo       20   0 2815056 195092  16184 S  10.0  5.0  14:59.99 QQ.exe      
+ 1097 root      20   0  421520  92348  64544 S   6.0  2.4   6:19.10 Xorg        
+ 2293 kuo       20   0 1565044 181860  58572 S   5.3  4.7   5:34.90 compiz      
+ 9526 kuo       20   0  917404 106284  48116 S   1.7  2.7   0:00.91 plugin-con+ 
+ 5925 kuo       20   0  668168  29608  22464 S   1.3  0.8   0:03.04 gnome-term+ 
+ 2797 kuo       20   0 1537728 190628  21608 S   0.7  4.9   2:06.03 lantern     
+ 8797 kuo       20   0  131604  39300  17132 S   0.7  1.0   0:15.68 idle-pytho+ 
+ 8810 kuo       20   0  225364  33524  13000 S   0.7  0.9   0:13.28 python3.4   
+  548 root     -51   0       0      0      0 S   0.3  0.0   0:19.53 irq/28-iwl+ 
+ 2232 kuo       20   0  124928   4692   4492 S   0.3  0.1   0:01.88 at-spi2-re+ 
+ 8084 root      20   0       0      0      0 S   0.3  0.0   0:00.65 kworker/1:1 
+    1 root      20   0   33788   3900   2596 S   0.0  0.1   0:01.09 init        
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd    
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.26 ksoftirqd/0 
+[1]+  已停止               top
+kuo@kuo-Inspiron-7420:~$ kill 2951
+kuo@kuo-Inspiron-7420:~$ top
+
+top - 22:18:19 up  6:16,  2 users,  load average: 1.18, 1.06, 1.04
+Tasks: 253 total,   2 running, 250 sleeping,   1 stopped,   0 zombie
+%Cpu(s):  9.0 us,  5.5 sy,  0.0 ni, 85.1 id,  0.4 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   3903164 total,  3502908 used,   400256 free,    47396 buffers
+KiB Swap:  7811068 total,    87292 used,  7723776 free.  1019720 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND     
+ 3422 kuo       20   0 2686968  36296  13872 S  23.3  0.9  37:03.28 Tencentdl.+ 
+ 2653 kuo       20   0 3459840 1.046g 127236 R  19.6 28.1  40:24.23 firefox     
+ 2293 kuo       20   0 1565040 181860  58572 S   5.6  4.7   5:36.36 compiz      
+ 1097 root      20   0  419512  91268  63464 S   5.3  2.3   6:20.40 Xorg        
+ 2863 kuo       20   0   12988  10152   1820 S   3.3  0.3  17:15.36 wineserver  
+ 5925 kuo       20   0  668104  29552  22464 S   2.0  0.8   0:03.44 gnome-term+ 
+ 9526 kuo       20   0  917404 106332  48116 S   1.7  2.7   0:01.47 plugin-con+ 
+ 2797 kuo       20   0 1537728 190628  21608 S   1.0  4.9   2:06.34 lantern     
+ 8797 kuo       20   0  131604  39300  17132 S   1.0  1.0   0:15.90 idle-pytho+ 
+ 8810 kuo       20   0  225364  33524  13000 S   1.0  0.9   0:13.47 python3.4   
+  548 root     -51   0       0      0      0 S   0.3  0.0   0:19.58 irq/28-iwl+ 
+ 2232 kuo       20   0  124928   4692   4492 S   0.3  0.1   0:01.89 at-spi2-re+ 
+ 9552 kuo       20   0   29164   3092   2512 R   0.3  0.1   0:00.07 top         
+    1 root      20   0   33788   3900   2596 S   0.0  0.1   0:01.09 init        
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd    
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.27 ksoftirqd/0 
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:+ 
+kuo@kuo-Inspiron-7420:~$ 
+```
