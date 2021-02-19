@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ros," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="加油，小伙儿" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.开始1.1 roscore首先确保roscore已经运行, 打开一个新的终端：1$ roscore 1.2turtlesim在本教程中我们也会使用到turtlesim，请在一个新的终端中运行：1$ rosrun turtlesim turtlesim_node 1.3通过键盘远程控制turtle我们也需要通过键盘来控制turtle的运动，请在一个新的终端中运行：1$ rosrun turtle">
+<meta name="keywords" content="ros">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/index.html">
+<meta property="og:site_name" content="加油，小伙儿">
+<meta property="og:description" content="1.开始1.1 roscore首先确保roscore已经运行, 打开一个新的终端：1$ roscore 1.2turtlesim在本教程中我们也会使用到turtlesim，请在一个新的终端中运行：1$ rosrun turtlesim turtlesim_node 1.3通过键盘远程控制turtle我们也需要通过键盘来控制turtle的运动，请在一个新的终端中运行：1$ rosrun turtle">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20170927222157598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpeGluXzM3MjUxMDQ0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_graph_echo.png">
+<meta property="og:image" content="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=turtle%28rostopicpub%29.png">
+<meta property="og:image" content="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=turtle%28rostopicpub%292.png">
+<meta property="og:image" content="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_graph_pub.png">
+<meta property="og:image" content="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_plot.png">
+<meta property="og:image" content="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_plot2.png">
+<meta property="og:updated_time" content="2021-02-19T13:32:13.191Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』">
+<meta name="twitter:description" content="1.开始1.1 roscore首先确保roscore已经运行, 打开一个新的终端：1$ roscore 1.2turtlesim在本教程中我们也会使用到turtlesim，请在一个新的终端中运行：1$ rosrun turtlesim turtlesim_node 1.3通过键盘远程控制turtle我们也需要通过键盘来控制turtle的运动，请在一个新的终端中运行：1$ rosrun turtle">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170927222157598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpeGluXzM3MjUxMDQ0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/"/>
+
+
+
+
+
+  <title>ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』 | 加油，小伙儿</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">加油，小伙儿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="熊的猫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.ico.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="加油，小伙儿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T21:08:01+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ros/" itemprop="url" rel="index">
+                    <span itemprop="name">ros</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-开始"><a href="#1-开始" class="headerlink" title="1.开始"></a>1.开始</h1><h2 id="1-1-roscore"><a href="#1-1-roscore" class="headerlink" title="1.1 roscore"></a>1.1 roscore</h2><p>首先确保roscore已经运行, 打开一个新的终端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ roscore</div></pre></td></tr></table></figure></p>
+<h2 id="1-2turtlesim"><a href="#1-2turtlesim" class="headerlink" title="1.2turtlesim"></a>1.2turtlesim</h2><p>在本教程中我们也会使用到turtlesim，请在一个新的终端中运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rosrun turtlesim turtlesim_node</div></pre></td></tr></table></figure></p>
+<h2 id="1-3通过键盘远程控制turtle"><a href="#1-3通过键盘远程控制turtle" class="headerlink" title="1.3通过键盘远程控制turtle"></a>1.3通过键盘远程控制turtle</h2><p>我们也需要通过键盘来控制turtle的运动，请在一个新的终端中运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rosrun turtlesim turtle_teleop_key</div></pre></td></tr></table></figure></p>
+<h2 id="1-4使用-rqt-graph"><a href="#1-4使用-rqt-graph" class="headerlink" title="1.4使用 rqt_graph"></a>1.4使用 rqt_graph</h2><p>rqt_graph能够创建一个显示当前系统运行情况的动态图形。rqt_graph是rqt程序包中的一部分。如果你没有安装，请通过以下命令来安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install ros-indigo-rqt</div><div class="line">$ sudo apt-get install ros-indigo-rqt-common-plugins</div></pre></td></tr></table></figure></p>
+<p>在一个新终端中运行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rosrun rqt_graph rqt_graph</div></pre></td></tr></table></figure></p>
+<p>就会弹出<code>rqt_graph</code>窗口</p>
+<p><img src="http://img.blog.csdn.net/20170927222157598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpeGluXzM3MjUxMDQ0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="2-『ROS-Topics』"><a href="#2-『ROS-Topics』" class="headerlink" title="2.『ROS Topics』"></a>2.『ROS Topics』</h1><p>如上图所示：<br>turtlesim_node节点和turtle_teleop_key节点之间是通过一个ROS话题来互相通信的。turtle_teleop_key在一个话题上发布按键输入消息，而turtlesim（这里是my_turtle）则订阅该话题以接收该消息。</p>
+<h2 id="2-1-rostopic介绍"><a href="#2-1-rostopic介绍" class="headerlink" title="2.1.rostopic介绍"></a>2.1.rostopic介绍</h2><p>rostopic命令工具能让你获取有关ROS话题的信息。 </p>
+<h3 id="2-1-1你可以使用帮助选项查看rostopic的子命令："><a href="#2-1-1你可以使用帮助选项查看rostopic的子命令：" class="headerlink" title="2.1.1你可以使用帮助选项查看rostopic的子命令："></a>2.1.1你可以使用帮助选项查看rostopic的子命令：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic -h</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">rostopic bw     display bandwidth used by topic</div><div class="line">rostopic echo   print messages to screen</div><div class="line">rostopic hz     display publishing rate of topic</div><div class="line">rostopic list   print information about active topics</div><div class="line">rostopic pub    publish data to topic</div><div class="line">rostopic type   print topic type</div></pre></td></tr></table></figure>
+<h3 id="2-1-2rostopic-echo可以显示在某个话题上发布的数据"><a href="#2-1-2rostopic-echo可以显示在某个话题上发布的数据" class="headerlink" title="2.1.2rostopic echo可以显示在某个话题上发布的数据"></a>2.1.2rostopic echo可以显示在某个话题上发布的数据</h3><p>让我们在一个新终端中看一下turtle_teleop_key节点在 /turtle1/cmd_vel话题上发布的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$rostopic echo /turtle1/cmd_vel</div></pre></td></tr></table></figure></p>
+<p>你可能看不到任何东西因为现在还没有数据发布到该话题上。接下来我们通过按下方向键使turtle_teleop_key节点发布数据。记住如果turtle没有动起来的话就需要你重新选中turtle_teleop_key节点运行时所在的终端窗口。</p>
+<p>现在当你按下向上方向键时应该会看到下面的信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">linear: </div><div class="line">  x: 2.0</div><div class="line">  y: 0.0</div><div class="line">  z: 0.0</div><div class="line">angular: </div><div class="line">  x: 0.0</div><div class="line">  y: 0.0</div><div class="line">  z: 0.0</div><div class="line">---</div><div class="line">linear: </div><div class="line">  x: 0.0</div><div class="line">  y: 0.0</div><div class="line">  z: 0.0</div><div class="line">angular: </div><div class="line">  x: 0.0</div><div class="line">  y: 0.0</div><div class="line">  z: 2.0</div><div class="line">---</div><div class="line">linear: </div><div class="line">  x: 0.0</div><div class="line">  y: 0.0</div><div class="line">  z: 0.0</div><div class="line">angular: </div><div class="line">  x: 0.0</div><div class="line">  y: 0.0</div><div class="line">  z: -2.0</div><div class="line">---</div></pre></td></tr></table></figure></p>
+<p>现在让我们再看一下rqt_graph（你可能需要刷新一下ROS graph）。正如你所看到的，rostopic echo(红色显示部分）现在也订阅了turtle1/command_velocity话题。 </p>
+<p><img src="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&amp;do=get&amp;target=rqt_graph_echo.png" alt="这里写图片描述"></p>
+<h2 id="2-1-3使用-rostopic-list"><a href="#2-1-3使用-rostopic-list" class="headerlink" title="2.1.3使用 rostopic list"></a>2.1.3使用 rostopic list</h2><p>rostopic list能够列出所有当前订阅和发布的话题。</p>
+<p>让我们查看一下list子命令需要的参数，在一个新终端中运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ rostopic list -h</div><div class="line"></div><div class="line">    Usage: rostopic list [/topic]</div><div class="line"></div><div class="line">    Options:</div><div class="line">      -h, --help            show this help message and exit</div><div class="line">      -b BAGFILE, --bag=BAGFILE</div><div class="line">                            list topics in .bag file</div><div class="line">      -v, --verbose         list full details about each topic</div><div class="line">      -p                    list only publishers</div><div class="line">      -s                    list only subscribers</div></pre></td></tr></table></figure></p>
+<p>在rostopic list中使用verbose选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic list -v</div></pre></td></tr></table></figure></p>
+<p>这会显示出有关所发布和订阅的话题及其类型的详细信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Published topics:</div><div class="line"> * /turtle1/color_sensor [turtlesim/Color] 1 publisher</div><div class="line"> * /turtle1/command_velocity [turtlesim/Velocity] 1 publisher</div><div class="line"> * /rosout [roslib/Log] 2 publishers</div><div class="line"> * /rosout_agg [roslib/Log] 1 publisher</div><div class="line"> * /turtle1/pose [turtlesim/Pose] 1 publisher</div><div class="line"></div><div class="line">Subscribed topics:</div><div class="line"> * /turtle1/command_velocity [turtlesim/Velocity] 1 subscriber</div><div class="line"> * /rosout [roslib/Log] 1 subscriber</div></pre></td></tr></table></figure></p>
+<h1 id="3-ROS-Messages"><a href="#3-ROS-Messages" class="headerlink" title="3.ROS Messages"></a>3.ROS Messages</h1><p>话题之间的通信是通过在节点之间发送ROS消息实现的。对于发布器(turtle_teleop_key)和订阅器(turtulesim_node)之间的通信，发布器和订阅器之间必须发送和接收相同类型的消息。这意味着话题的类型是由发布在它上面的消息类型决定的。使用rostopic type命令可以查看发布在某个话题上的消息类型。</p>
+<h2 id="3-1使用-rostopic-type"><a href="#3-1使用-rostopic-type" class="headerlink" title="3.1使用 rostopic type"></a>3.1使用 rostopic type</h2><p>rostopic type 命令用来查看所发布话题的消息类型。</p>
+<p>用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rostopic type [topic]</div></pre></td></tr></table></figure></p>
+<p>hydro版请运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic type /turtle1/cmd_vel</div></pre></td></tr></table></figure></p>
+<pre><code>你应该会看到:
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">geometry_msgs/Twist</div></pre></td></tr></table></figure>
+<p>我们可以使用rosmsg命令来查看消息的详细情况：</p>
+<p>hydro版：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rosmsg show geometry_msgs/Twist</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">geometry_msgs/Vector3 linear</div><div class="line">  float64 x</div><div class="line">  float64 y</div><div class="line">  float64 z</div><div class="line">geometry_msgs/Vector3 angular</div><div class="line">  float64 x</div><div class="line">  float64 y</div><div class="line">  float64 z</div></pre></td></tr></table></figure>
+<p>现在我们已经知道了turtlesim节点所期望的消息类型，接下来我们就可以给turtle发布命令了。</p>
+<h1 id="4-继续学习-rostopic"><a href="#4-继续学习-rostopic" class="headerlink" title="4.继续学习 rostopic"></a>4.继续学习 rostopic</h1><p>现在我们已经了解了什么是ROS的消息，接下来我们开始结合消息来使用rostopic。</p>
+<h2 id="4-1使用-rostopic-pub"><a href="#4-1使用-rostopic-pub" class="headerlink" title="4.1使用 rostopic pub"></a>4.1使用 rostopic pub</h2><p>rostopic pub可以把数据发布到当前某个正在广播的话题上。</p>
+<p>用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rostopic pub [topic] [msg_type] [args]</div></pre></td></tr></table></figure></p>
+<p>示例（hydro版)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- &apos;[2.0, 0.0, 0.0]&apos; &apos;[0.0, 0.0, 1.8]&apos;</div></pre></td></tr></table></figure></p>
+<p>以上命令会发送一条消息给turtlesim，告诉它以2.0大小的线速度和1.8大小的角速度开始移动。<br><img src="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&amp;do=get&amp;target=turtle%28rostopicpub%29.png" alt="这里写图片描述"><br>这是一个非常复杂的例子，因此让我们来详细分析一下其中的每一个参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rostopic pub</div></pre></td></tr></table></figure></p>
+<pre><code>这条命令将会发布消息到某个给定的话题。 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-1</div></pre></td></tr></table></figure>
+<pre><code>（单个破折号）这个参数选项使rostopic发布一条消息后马上退出。 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/turtle1/command_velocity</div></pre></td></tr></table></figure>
+<pre><code>这是消息所发布到的话题名称。 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">turtlesim/Velocity</div></pre></td></tr></table></figure>
+<pre><code>这是所发布消息的类型。 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--</div></pre></td></tr></table></figure>
+<pre><code>（双破折号）这会告诉命令选项解析器接下来的参数部分都不是命令选项。这在参数里面包含有破折号-（比如负号）时是必须要添加的。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2.0 1.8</div></pre></td></tr></table></figure>
+<pre><code>正如之前提到的，在一个turtlesim/Velocity消息里面包含有两个浮点型元素：linear和angular。在本例中，2.0是linear的值，1.8是angular的值。这些参数其实是按照YAML语法格式编写的，这在YAML文档中有更多的描述。 
+</code></pre><p>你可能已经注意到turtle已经停止移动了。这是因为turtle需要一个稳定的频率为1Hz的命令流来保持移动状态。我们可以使用rostopic pub -r命令来发布一个稳定的命令流（非hydro版）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic pub /turtle1/command_velocity turtlesim/Velocity -r 1 -- 2.0  -1.8</div></pre></td></tr></table></figure></p>
+<p>hydro版：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- &apos;[2.0, 0.0, 0.0]&apos; &apos;[0.0, 0.0, 1.8]&apos;</div></pre></td></tr></table></figure></p>
+<p>这条命令以1Hz的频率发布速度命令到速度话题上。</p>
+<p>  <img src="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&amp;do=get&amp;target=turtle%28rostopicpub%292.png" alt="这里写图片描述"></p>
+<p>我们也可以看一下rqt_graph中的情形，可以看到rostopic发布器节点（红色）正在与rostopic echo节点（绿色）进行通信：</p>
+<p><img src="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&amp;do=get&amp;target=rqt_graph_pub.png" alt="这里写图片描述"></p>
+<p>正如你所看到的，turtle正沿着一个圆形轨迹连续运动。我们可以在一个新终端中通过rostopic echo命令来查看turtlesim所发布的数据。</p>
+<h2 id="4-2使用-rostopic-hz"><a href="#4-2使用-rostopic-hz" class="headerlink" title="4.2使用 rostopic hz"></a>4.2使用 rostopic hz</h2><p>rostopic hz命令可以用来查看数据发布的频率。</p>
+<p>用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rostopic hz [topic]</div></pre></td></tr></table></figure></p>
+<p>我们看一下turtlesim_node发布/turtle/pose时有多快：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic hz /turtle1/pose</div></pre></td></tr></table></figure></p>
+<p>你会看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">subscribed to [/turtle1/pose]</div><div class="line">average rate: 59.354</div><div class="line">        min: 0.005s max: 0.027s std dev: 0.00284s window: 58</div><div class="line">average rate: 59.459</div><div class="line">        min: 0.005s max: 0.027s std dev: 0.00271s window: 118</div><div class="line">average rate: 59.539</div><div class="line">        min: 0.004s max: 0.030s std dev: 0.00339s window: 177</div><div class="line">average rate: 59.492</div><div class="line">        min: 0.004s max: 0.030s std dev: 0.00380s window: 237</div><div class="line">average rate: 59.463</div><div class="line">        min: 0.004s max: 0.030s std dev: 0.00380s window: 290</div></pre></td></tr></table></figure></p>
+<p>现在我们可以知道了turtlesim正以大约60Hz的频率发布数据给turtle。我们也可以结合rostopic type和rosmsg show命令来获取关于某个话题的更深层次的信息（非hydro版）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rostopic type /turtle1/command_velocity | rosmsg show</div></pre></td></tr></table></figure></p>
+<p>hydro版：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rostopic type /turtle1/cmd_vel | rosmsg show</div></pre></td></tr></table></figure></p>
+<p>到此我们已经完成了通过rostopic来查看话题相关情况的过程，接下来我将使用另一个工具来查看turtlesim发布的数据。</p>
+<h1 id="5-使用-rqt-plot"><a href="#5-使用-rqt-plot" class="headerlink" title="5.使用 rqt_plot"></a>5.使用 rqt_plot</h1><p>注意：如果你使用的是electric或更早期的ROS版本，那么rqt命令是不可用的，请使用rxplot命令来代替。</p>
+<p>rqt_plot命令可以实时显示一个发布到某个话题上的数据变化图形。这里我们将使用rqt_plot命令来绘制正在发布到/turtle1/pose话题上的数据变化图形。首先，在一个新终端中运行rqt_plot命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rosrun rqt_plot rqt_plot</div></pre></td></tr></table></figure></p>
+<p>这会弹出一个新窗口，在窗口左上角的一个文本框里面你可以添加需要绘制的话题。在里面输入/turtle1/pose/x后之前处于禁用状态的加号按钮将会被使能变亮。按一下该按钮，并对/turtle1/pose/y重复相同的过程。现在你会在图形中看到turtle的x-y位置坐标图。</p>
+<p><img src="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&amp;do=get&amp;target=rqt_plot.png" alt="这里写图片描述"></p>
+<p>按下减号按钮会显示一组菜单让你隐藏图形中指定的话题。现在隐藏掉你刚才添加的话题并添加/turtle1/pose/theta，你会看到如下图所示的图形：<br><img src="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics?action=AttachFile&amp;do=get&amp;target=rqt_plot2.png" alt="这里写图片描述"><br>本部分教程到此为止，请使用Ctrl-C退出rostopic命令，但要保持turtlesim继续运行。</p>
+<p>到此我们已经理解了ROS话题是如何工作的，接下来我们开始学习理解ROS服务和参数。 </p>
+<p>来自：<br><a href="http://wiki.ros.org/cn/ROS/Tutorials/UnderstandingTopics" target="_blank" rel="external">理解ROS话题</a><br>本教程介绍ROS话题（topics）以及如何使用rostopic 和 rqt_plot 命令行工具。 </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ros/" rel="tag"># ros</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/ros/ros：（2）ros节点/" rel="next" title="ros：（2）ros节点">
+                <i class="fa fa-chevron-left"></i> ros：（2）ros节点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/ros/ros：（4）理解ROS服务和参数/" rel="prev" title="ros：（4）理解ROS服务和参数">
+                ros：（4）理解ROS服务和参数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/favicon.ico.png"
+               alt="熊的猫" />
+          <p class="site-author-name" itemprop="name">熊的猫</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是“熊的猫”的博客，在这里，将记录我的学习历程。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiongdemao" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://translate.google.cn/" title="谷歌翻译" target="_blank">谷歌翻译</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-开始"><span class="nav-number">1.</span> <span class="nav-text">1.开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-roscore"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 roscore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2turtlesim"><span class="nav-number">1.2.</span> <span class="nav-text">1.2turtlesim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3通过键盘远程控制turtle"><span class="nav-number">1.3.</span> <span class="nav-text">1.3通过键盘远程控制turtle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4使用-rqt-graph"><span class="nav-number">1.4.</span> <span class="nav-text">1.4使用 rqt_graph</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-『ROS-Topics』"><span class="nav-number">2.</span> <span class="nav-text">2.『ROS Topics』</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-rostopic介绍"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.rostopic介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1你可以使用帮助选项查看rostopic的子命令："><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1你可以使用帮助选项查看rostopic的子命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2rostopic-echo可以显示在某个话题上发布的数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2rostopic echo可以显示在某个话题上发布的数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-3使用-rostopic-list"><span class="nav-number">2.2.</span> <span class="nav-text">2.1.3使用 rostopic list</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-ROS-Messages"><span class="nav-number">3.</span> <span class="nav-text">3.ROS Messages</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1使用-rostopic-type"><span class="nav-number">3.1.</span> <span class="nav-text">3.1使用 rostopic type</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-继续学习-rostopic"><span class="nav-number">4.</span> <span class="nav-text">4.继续学习 rostopic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1使用-rostopic-pub"><span class="nav-number">4.1.</span> <span class="nav-text">4.1使用 rostopic pub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2使用-rostopic-hz"><span class="nav-number">4.2.</span> <span class="nav-text">4.2使用 rostopic hz</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-使用-rqt-plot"><span class="nav-number">5.</span> <span class="nav-text">5.使用 rqt_plot</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">熊的猫</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    &nbsp|&nbsp本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  &nbsp|&nbsp本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xiongdemao.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/';
+          this.page.identifier = '2017/11/13/ros/ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』/';
+          this.page.title = 'ros：（3）ROS话题_『ROS Topics』『rqt_graph』『ROS Messages』『rqt_plot』';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xiongdemao.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

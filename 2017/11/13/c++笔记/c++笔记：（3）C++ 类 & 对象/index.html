@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="加油，小伙儿" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.C++ 类 &amp;amp; 对象C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。 类用于指定对象的形式，它包含了数据表示法和用于处理数据的方法。类中的数据和方法称为类的成员。函数在一个类中被称为类的成员。 C++ 类定义12345678class Box&amp;#123;   public:      double len">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++笔记：（3）:C++ 类 &amp; 对象">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/index.html">
+<meta property="og:site_name" content="加油，小伙儿">
+<meta property="og:description" content="1.C++ 类 &amp;amp; 对象C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。 类用于指定对象的形式，它包含了数据表示法和用于处理数据的方法。类中的数据和方法称为类的成员。函数在一个类中被称为类的成员。 C++ 类定义12345678class Box&amp;#123;   public:      double len">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-02-19T13:32:12.595Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++笔记：（3）:C++ 类 &amp; 对象">
+<meta name="twitter:description" content="1.C++ 类 &amp;amp; 对象C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。 类用于指定对象的形式，它包含了数据表示法和用于处理数据的方法。类中的数据和方法称为类的成员。函数在一个类中被称为类的成员。 C++ 类定义12345678class Box&amp;#123;   public:      double len">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/"/>
+
+
+
+
+
+  <title>c++笔记：（3）:C++ 类 & 对象 | 加油，小伙儿</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">加油，小伙儿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="熊的猫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.ico.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="加油，小伙儿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c++笔记：（3）:C++ 类 & 对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T21:08:58+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-C-类-amp-对象"><a href="#1-C-类-amp-对象" class="headerlink" title="1.C++ 类 &amp; 对象"></a>1.C++ 类 &amp; 对象</h1><p>C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。</p>
+<p>类用于指定对象的形式，它包含了数据表示法和用于处理数据的方法。类中的数据和方法称为类的成员。函数在一个类中被称为类的成员。</p>
+<h2 id="C-类定义"><a href="#C-类定义" class="headerlink" title="C++ 类定义"></a>C++ 类定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      double length;   // 盒子的长度</div><div class="line">      double breadth;  // 盒子的宽度</div><div class="line">      double height;   // 盒子的高度</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="定义-C-对象"><a href="#定义-C-对象" class="headerlink" title="定义 C++ 对象"></a>定义 C++ 对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Box Box1;          // 声明 Box1，类型为 Box</div><div class="line">Box Box2;          // 声明 Box2，类型为 Box</div></pre></td></tr></table></figure>
+<h2 id="访问数据成员"><a href="#访问数据成员" class="headerlink" title="访问数据成员"></a>访问数据成员</h2><p>类的对象的公共数据成员可以使用直接成员访问运算符 (.) 来访问。为了更好地理解这些概念，让我们尝试一下下面的实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">     public :</div><div class="line">       double length;    //长度</div><div class="line">       double breadth;  //宽度</div><div class="line">       double height;     //高度</div><div class="line">  </div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">  Box Box1;     //声明 Box1 ,类型为 Box</div><div class="line">  Box Box2;     //声明 Box2 ,类型为 Box </div><div class="line">  double volume = 0.0;		//用于存储体积</div><div class="line">  </div><div class="line">  // Box1 赋值</div><div class="line">  Box1.height = 5.0;</div><div class="line">  Box1.length = 6.0;</div><div class="line">  Box1.breadth = 7.0;</div><div class="line">  </div><div class="line">  //Box2 赋值</div><div class="line">  Box2.height = 10.0;</div><div class="line">  Box2.length = 12.0;</div><div class="line">  Box2.breadth = 13.0;</div><div class="line">  </div><div class="line">  //Box1 的体积</div><div class="line">  volume = Box1.height * Box1.length * Box1.breadth;</div><div class="line">  cout &lt;&lt;  &quot;Box1 的体积：&quot; &lt;&lt; volume &lt;&lt; endl ;</div><div class="line">  </div><div class="line">  //Box2 的体积</div><div class="line">  volume = Box2.height * Box2.length * Box2.breadth;</div><div class="line">  cout &lt;&lt; &quot;Box2 的体积：&quot; &lt;&lt; volume &lt;&lt; endl;</div><div class="line">    return 0;</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">Box1 的体积：<span class="number">210</span></div><div class="line">Box2 的体积：<span class="number">1560</span></div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure></p>
+<h2 id="1-1C-类成员函数"><a href="#1-1C-类成员函数" class="headerlink" title="1.1C++ 类成员函数"></a>1.1C++ 类成员函数</h2><p><code>类的成员函数</code>是指那些把定义和原型写在类定义内部的函数，就像类定义中的其他变量一样。类成员函数是类的一个成员，它可以操作类的任意对象，可以访问对象中的所有成员。</p>
+<p>让我们看看之前定义的类 Box，现在我们要使用成员函数来访问类的成员，而不是直接访问这些类的成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      double length;         // 长度</div><div class="line">      double breadth;        // 宽度</div><div class="line">      double height;         // 高度</div><div class="line">      double getVolume(void);// 返回体积</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>成员函数可以定义在类定义内部，或者单独使用范围解析运算符<code>::</code> 来定义。在类定义中定义的成员函数把函数声明为内联的，即便没有使用 <code>inline</code> 标识符。所以您可以按照如下方式定义 <code>Volume()</code>函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      double length;      // 长度</div><div class="line">      double breadth;     // 宽度</div><div class="line">      double height;      // 高度</div><div class="line">   </div><div class="line">      double getVolume(void)</div><div class="line">      &#123;</div><div class="line">         return length * breadth * height;</div><div class="line">      &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>您也可以在类的外部使用范围解析运算符<code>::</code> 定义该函数，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">double Box::getVolume(void)</div><div class="line">&#123;</div><div class="line">    return length * breadth * height;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里，需要强调一点，在 <code>::</code> 运算符之前必须使用类名。调用成员函数是在对象上使用点运算符（.），这样它就能操作与该对象相关的数据，如下所示：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Box myBox;          <span class="comment">// 创建一个对象</span></div><div class="line"></div><div class="line">myBox.getVolume();  <span class="comment">// 调用该对象的成员函数</span></div></pre></td></tr></table></figure></p>
+<p>让我们使用上面提到的概念来设置和获取类中不同的成员的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      double length;         // 长度</div><div class="line">      double breadth;        // 宽度</div><div class="line">      double height;         // 高度</div><div class="line"></div><div class="line">      // 成员函数声明</div><div class="line">      double getVolume(void);</div><div class="line">      void setLength( double len );</div><div class="line">      void setBreadth( double bre );</div><div class="line">      void setHeight( double hei );</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 成员函数定义</div><div class="line">double Box::getVolume(void)</div><div class="line">&#123;</div><div class="line">    return length * breadth * height;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void Box::setLength( double len )</div><div class="line">&#123;</div><div class="line">    length = len;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void Box::setBreadth( double bre )</div><div class="line">&#123;</div><div class="line">    breadth = bre;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void Box::setHeight( double hei )</div><div class="line">&#123;</div><div class="line">    height = hei;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Box Box1;                // 声明 Box1，类型为 Box</div><div class="line">   Box Box2;                // 声明 Box2，类型为 Box</div><div class="line">   double volume = 0.0;     // 用于存储体积</div><div class="line"> </div><div class="line">   // box 1 详述</div><div class="line">   Box1.setLength(6.0); </div><div class="line">   Box1.setBreadth(7.0); </div><div class="line">   Box1.setHeight(5.0);</div><div class="line"></div><div class="line">   // box 2 详述</div><div class="line">   Box2.setLength(12.0); </div><div class="line">   Box2.setBreadth(13.0); </div><div class="line">   Box2.setHeight(10.0);</div><div class="line"></div><div class="line">   // box 1 的体积</div><div class="line">   volume = Box1.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Box1 的体积：&quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line"></div><div class="line">   // box 2 的体积</div><div class="line">   volume = Box2.getVolume();</div><div class="line">   cout &lt;&lt; &quot;Box2 的体积：&quot; &lt;&lt; volume &lt;&lt;endl;</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Box1 的体积： 210</div><div class="line">Box2 的体积： 1560</div></pre></td></tr></table></figure></p>
+<h2 id="1-2C-类访问修饰符"><a href="#1-2C-类访问修饰符" class="headerlink" title="1.2C++ 类访问修饰符"></a>1.2C++ 类访问修饰符</h2><p><strong>数据封装</strong>是面向对象编程的一个重要特点，它防止函数直接访问类类型的内部成员。类成员的访问限制是通过在类主体内部对各个区域标记 public、private、protected 来指定的。关键字 public、private、protected 称为<strong>访问修饰符</strong>。</p>
+<p>一个类可以有多个 public、protected 或 private 标记区域。每个标记区域在下一个标记区域开始之前或者在遇到类主体结束右括号之前都是有效的。<strong>成员和类的默认访问修饰符是 private。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Base &#123;</div><div class="line"> </div><div class="line">   public:</div><div class="line"> </div><div class="line">  // 公有成员</div><div class="line"> </div><div class="line">   protected:</div><div class="line"> </div><div class="line">  // 受保护成员</div><div class="line"> </div><div class="line">   private:</div><div class="line"> </div><div class="line">  // 私有成员</div><div class="line"> </div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="公有（public）成员"><a href="#公有（public）成员" class="headerlink" title="公有（public）成员"></a>公有（public）成员</h3><p>公有成员在程序中类的外部是可访问的。您可以不使用任何成员函数来设置和获取公有变量的值，如下所示：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Line</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      double length;</div><div class="line">      void setLength( double len );</div><div class="line">      double getLength( void );</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 成员函数定义</div><div class="line">double Line::getLength(void)</div><div class="line">&#123;</div><div class="line">    return length ;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void Line::setLength( double len )</div><div class="line">&#123;</div><div class="line">    length = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Line line;</div><div class="line"> </div><div class="line">   // 设置长度</div><div class="line">   line.setLength(6.0); </div><div class="line">   cout &lt;&lt; &quot;Length of line : &quot; &lt;&lt; line.getLength() &lt;&lt;endl;</div><div class="line"> </div><div class="line">   // 不使用成员函数设置长度</div><div class="line">   line.length = 10.0; // OK: 因为 length 是公有的</div><div class="line">   cout &lt;&lt; &quot;Length of line : &quot; &lt;&lt; line.length &lt;&lt;endl;</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Length of line : 6</div><div class="line">Length of line : 10</div></pre></td></tr></table></figure></p>
+<h3 id="私有（private）成员"><a href="#私有（private）成员" class="headerlink" title="私有（private）成员"></a>私有（private）成员</h3><p>私有成员变量或函数在类的外部是不可访问的，甚至是不可查看的。只有类和友元函数可以访问私有成员。</p>
+<p><strong>默认情况下，类的所有成员都是私有的。</strong>例如在下面的类中，width 是一个私有成员，这意味着，如果您没有使用任何访问修饰符，类的成员将被假定为私有成员：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   double width;    //默认情况下，类的所有成员都是私有的。</div><div class="line">   public:</div><div class="line">      double length;</div><div class="line">      void setWidth( double wid );</div><div class="line">      double getWidth( void );</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>实际操作中，我们一般会在私有区域定义数据，在公有区域定义相关的函数，以便在类的外部也可以调用这些函数，如下所示：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      double length;</div><div class="line">      void setWidth( double wid );</div><div class="line">      double getWidth( void );</div><div class="line"> </div><div class="line">   private:</div><div class="line">      double width;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 成员函数定义</div><div class="line">double Box::getWidth(void)</div><div class="line">&#123;</div><div class="line">    return width ;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void Box::setWidth( double wid )</div><div class="line">&#123;</div><div class="line">    width = wid;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Box box;</div><div class="line"> </div><div class="line">   // 不使用成员函数设置长度</div><div class="line">   box.length = 10.0; // OK: 因为 length 是公有的</div><div class="line">   cout &lt;&lt; &quot;Length of box : &quot; &lt;&lt; box.length &lt;&lt;endl;</div><div class="line"> </div><div class="line">   // 不使用成员函数设置宽度</div><div class="line">   // box.width = 10.0; // Error: 因为 width 是私有的</div><div class="line">   box.setWidth(10.0);  // 使用成员函数设置宽度</div><div class="line">   cout &lt;&lt; &quot;Width of box : &quot; &lt;&lt; box.getWidth() &lt;&lt;endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Length of box : 10</div><div class="line">Width of box : 10</div></pre></td></tr></table></figure></p>
+<h3 id="保护（protected）成员"><a href="#保护（protected）成员" class="headerlink" title="保护（protected）成员"></a>保护（protected）成员</h3><p>保护成员变量或函数与私有成员十分相似，但有一点不同，保护成员在派生类（即子类）中是可访问的。</p>
+<p>在下一个章节中，您将学习到派生类和继承的知识。现在您可以看到下面的实例中，我们从父类 Box 派生了一个子类 smallBox。</p>
+<p>下面的实例与前面的实例类似，在这里 width 成员可被派生类 smallBox 的任何成员函数访问。<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   protected:</div><div class="line">      double width;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">class SmallBox:Box // SmallBox 是派生类</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      void setSmallWidth( double wid );</div><div class="line">      double getSmallWidth( void );</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 子类的成员函数</div><div class="line">double SmallBox::getSmallWidth(void)</div><div class="line">&#123;</div><div class="line">    return width ;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void SmallBox::setSmallWidth( double wid )</div><div class="line">&#123;</div><div class="line">    width = wid;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   SmallBox box;</div><div class="line"> </div><div class="line">   // 使用成员函数设置宽度</div><div class="line">   box.setSmallWidth(5.0);</div><div class="line">   cout &lt;&lt; &quot;Width of box : &quot;&lt;&lt; box.getSmallWidth() &lt;&lt; endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Width of box : 5</div></pre></td></tr></table></figure></p>
+<h3 id="继承中的特点"><a href="#继承中的特点" class="headerlink" title="继承中的特点"></a>继承中的特点</h3><p>有public, protected, private三种继承方式，它们相应地改变了基类成员的访问属性。</p>
+<blockquote>
+<p>   1.public 继承：基类 public 成员，protected 成员，private 成员的访问属性在派生类中分别变成：public, protected, private</p>
+<p>   2.protected 继承：基类 public 成员，protected 成员，private 成员的访问属性在派生类中分别变成：protected, protected, private</p>
+<p>   3.private 继承：基类 public 成员，protected 成员，private 成员的访问属性在派生类中分别变成：private, private, private</p>
+</blockquote>
+<p>但无论哪种继承方式，上面两点都没有改变：</p>
+<blockquote>
+<p>   1.private 成员只能被本类成员（类内）和友元访问，不能被派生类访问；</p>
+<p>  2.protected 成员可以被派生类访问。</p>
+</blockquote>
+<h3 id="public-继承"><a href="#public-继承" class="headerlink" title="public 继承"></a>public 继承</h3><p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;assert.h&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class A&#123;</div><div class="line">public:</div><div class="line">  int a;</div><div class="line">  A()&#123;</div><div class="line">    a1 = 1;</div><div class="line">    a2 = 2;</div><div class="line">    a3 = 3;</div><div class="line">    a = 4;</div><div class="line">  &#125;</div><div class="line">  void fun()&#123;</div><div class="line">    cout &lt;&lt; a &lt;&lt; endl;    //正确</div><div class="line">    cout &lt;&lt; a1 &lt;&lt; endl;   //正确</div><div class="line">    cout &lt;&lt; a2 &lt;&lt; endl;   //正确</div><div class="line">    cout &lt;&lt; a3 &lt;&lt; endl;   //正确</div><div class="line">  &#125;</div><div class="line">public:</div><div class="line">  int a1;</div><div class="line">protected:</div><div class="line">  int a2;</div><div class="line">private:</div><div class="line">  int a3;</div><div class="line">&#125;;</div><div class="line">class B : public A&#123;</div><div class="line">public:</div><div class="line">  int a;</div><div class="line">  B(int i)&#123;</div><div class="line">    A();</div><div class="line">    a = i;</div><div class="line">  &#125;</div><div class="line">  void fun()&#123;</div><div class="line">    cout &lt;&lt; a &lt;&lt; endl;       //正确，public成员</div><div class="line">    cout &lt;&lt; a1 &lt;&lt; endl;       //正确，基类的public成员，在派生类中仍是public成员。</div><div class="line">    cout &lt;&lt; a2 &lt;&lt; endl;       //正确，基类的protected成员，在派生类中仍是protected可以被派生类访问。</div><div class="line">    cout &lt;&lt; a3 &lt;&lt; endl;       //错误，基类的private成员不能被派生类访问。</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">int main()&#123;</div><div class="line">  B b(10);</div><div class="line">  cout &lt;&lt; b.a &lt;&lt; endl;</div><div class="line">  cout &lt;&lt; b.a1 &lt;&lt; endl;   //正确</div><div class="line">  cout &lt;&lt; b.a2 &lt;&lt; endl;   //错误，类外不能访问protected成员</div><div class="line">  cout &lt;&lt; b.a3 &lt;&lt; endl;   //错误，类外不能访问private成员</div><div class="line">  system(&quot;pause&quot;);</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="protected-继承"><a href="#protected-继承" class="headerlink" title="protected 继承"></a>protected 继承</h3><p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;assert.h&gt;</div><div class="line">using namespace std;</div><div class="line">class A&#123;</div><div class="line">public:</div><div class="line">  int a;</div><div class="line">  A()&#123;</div><div class="line">    a1 = 1;</div><div class="line">    a2 = 2;</div><div class="line">    a3 = 3;</div><div class="line">    a = 4;</div><div class="line">  &#125;</div><div class="line">  void fun()&#123;</div><div class="line">    cout &lt;&lt; a &lt;&lt; endl;    //正确</div><div class="line">    cout &lt;&lt; a1 &lt;&lt; endl;   //正确</div><div class="line">    cout &lt;&lt; a2 &lt;&lt; endl;   //正确</div><div class="line">    cout &lt;&lt; a3 &lt;&lt; endl;   //正确</div><div class="line">  &#125;</div><div class="line">public:</div><div class="line">  int a1;</div><div class="line">protected:</div><div class="line">  int a2;</div><div class="line">private:</div><div class="line">  int a3;</div><div class="line">&#125;;</div><div class="line">class B : protected A&#123;</div><div class="line">public:</div><div class="line">  int a;</div><div class="line">  B(int i)&#123;</div><div class="line">    A();</div><div class="line">    a = i;</div><div class="line">  &#125;</div><div class="line">  void fun()&#123;</div><div class="line">    cout &lt;&lt; a &lt;&lt; endl;       //正确，public成员。</div><div class="line">    cout &lt;&lt; a1 &lt;&lt; endl;       //正确，基类的public成员，在派生类中变成了protected，可以被派生类访问。</div><div class="line">    cout &lt;&lt; a2 &lt;&lt; endl;       //正确，基类的protected成员，在派生类中还是protected，可以被派生类访问。</div><div class="line">    cout &lt;&lt; a3 &lt;&lt; endl;       //错误，基类的private成员不能被派生类访问。</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">int main()&#123;</div><div class="line">  B b(10);</div><div class="line">  cout &lt;&lt; b.a &lt;&lt; endl;       //正确。public成员</div><div class="line">  cout &lt;&lt; b.a1 &lt;&lt; endl;      //错误，protected成员不能在类外访问。</div><div class="line">  cout &lt;&lt; b.a2 &lt;&lt; endl;      //错误，protected成员不能在类外访问。</div><div class="line">  cout &lt;&lt; b.a3 &lt;&lt; endl;      //错误，private成员不能在类外访问。</div><div class="line">  system(&quot;pause&quot;);</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="private-继承"><a href="#private-继承" class="headerlink" title="private 继承"></a>private 继承</h3><p>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;assert.h&gt;</div><div class="line">using namespace std;</div><div class="line">class A&#123;</div><div class="line">public:</div><div class="line">  int a;</div><div class="line">  A()&#123;</div><div class="line">    a1 = 1;</div><div class="line">    a2 = 2;</div><div class="line">    a3 = 3;</div><div class="line">    a = 4;</div><div class="line">  &#125;</div><div class="line">  void fun()&#123;</div><div class="line">    cout &lt;&lt; a &lt;&lt; endl;    //正确</div><div class="line">    cout &lt;&lt; a1 &lt;&lt; endl;   //正确</div><div class="line">    cout &lt;&lt; a2 &lt;&lt; endl;   //正确</div><div class="line">    cout &lt;&lt; a3 &lt;&lt; endl;   //正确</div><div class="line">  &#125;</div><div class="line">public:</div><div class="line">  int a1;</div><div class="line">protected:</div><div class="line">  int a2;</div><div class="line">private:</div><div class="line">  int a3;</div><div class="line">&#125;;</div><div class="line">class B : private A&#123;</div><div class="line">public:</div><div class="line">  int a;</div><div class="line">  B(int i)&#123;</div><div class="line">    A();</div><div class="line">    a = i;</div><div class="line">  &#125;</div><div class="line">  void fun()&#123;</div><div class="line">    cout &lt;&lt; a &lt;&lt; endl;       //正确，public成员。</div><div class="line">    cout &lt;&lt; a1 &lt;&lt; endl;       //正确，基类public成员,在派生类中变成了private,可以被派生类访问。</div><div class="line">    cout &lt;&lt; a2 &lt;&lt; endl;       //正确，基类的protected成员，在派生类中变成了private,可以被派生类访问。</div><div class="line">    cout &lt;&lt; a3 &lt;&lt; endl;       //错误，基类的private成员不能被派生类访问。</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">int main()&#123;</div><div class="line">  B b(10);</div><div class="line">  cout &lt;&lt; b.a &lt;&lt; endl;       //正确。public成员</div><div class="line">  cout &lt;&lt; b.a1 &lt;&lt; endl;      //错误，private成员不能在类外访问。</div><div class="line">  cout &lt;&lt; b.a2 &lt;&lt; endl;      //错误, private成员不能在类外访问。</div><div class="line">  cout &lt;&lt; b.a3 &lt;&lt; endl;      //错误，private成员不能在类外访问。</div><div class="line">  system(&quot;pause&quot;);</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="1-3C-类构造函数-amp-析构函数"><a href="#1-3C-类构造函数-amp-析构函数" class="headerlink" title="1.3C++ 类构造函数 &amp; 析构函数"></a>1.3C++ 类构造函数 &amp; 析构函数</h2><h3 id="类的构造函数"><a href="#类的构造函数" class="headerlink" title="类的构造函数"></a>类的构造函数</h3><p><strong>类的构造函数</strong>是类的一种特殊的成员函数，它会在每次创建类的新对象时执行。</p>
+<p>构造函数的名称与类的名称是完全相同的，并且不会返回任何类型，也不会返回 void。构造函数可用于为某些成员变量设置初始值。</p>
+<p>下面的实例有助于更好地理解构造函数的概念：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Line</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      void setLength( double len );</div><div class="line">      double getLength( void );</div><div class="line">      Line();  // 这是构造函数</div><div class="line"> </div><div class="line">   private:</div><div class="line">      double length;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 成员函数定义，包括构造函数</div><div class="line">Line::Line(void)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;Object is being created&quot; &lt;&lt; endl;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void Line::setLength( double len )</div><div class="line">&#123;</div><div class="line">    length = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">double Line::getLength( void )</div><div class="line">&#123;</div><div class="line">    return length;</div><div class="line">&#125;</div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Line line;</div><div class="line"> </div><div class="line">   // 设置长度</div><div class="line">   line.setLength(6.0); </div><div class="line">   cout &lt;&lt; &quot;Length of line : &quot; &lt;&lt; line.getLength() &lt;&lt;endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object is being created</div><div class="line">Length of line : 6</div></pre></td></tr></table></figure></p>
+<h3 id="带参数的构造函数"><a href="#带参数的构造函数" class="headerlink" title="带参数的构造函数"></a>带参数的构造函数</h3><p>默认的构造函数没有任何参数，但如果需要，构造函数也可以带有参数。这样在创建对象时就会给对象赋初始值，如下面的例子所示：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Line</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      void setLength( double len );</div><div class="line">      double getLength( void );</div><div class="line">      Line(double len);  // 这是构造函数</div><div class="line"> </div><div class="line">   private:</div><div class="line">      double length;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 成员函数定义，包括构造函数</div><div class="line">Line::Line( double len)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;Object is being created, length = &quot; &lt;&lt; len &lt;&lt; endl;</div><div class="line">    length = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void Line::setLength( double len )</div><div class="line">&#123;</div><div class="line">    length = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">double Line::getLength( void )</div><div class="line">&#123;</div><div class="line">    return length;</div><div class="line">&#125;</div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Line line(10.0);</div><div class="line"> </div><div class="line">   // 获取默认设置的长度</div><div class="line">   cout &lt;&lt; &quot;Length of line : &quot; &lt;&lt; line.getLength() &lt;&lt;endl;</div><div class="line">   // 再次设置长度</div><div class="line">   line.setLength(6.0); </div><div class="line">   cout &lt;&lt; &quot;Length of line : &quot; &lt;&lt; line.getLength() &lt;&lt;endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object is being created, length = 10</div><div class="line">Length of line : 10</div><div class="line">Length of line : 6</div></pre></td></tr></table></figure></p>
+<h3 id="使用初始化列表来初始化字段"><a href="#使用初始化列表来初始化字段" class="headerlink" title="使用初始化列表来初始化字段"></a>使用初始化列表来初始化字段</h3><p>使用初始化列表来初始化字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Line::Line( double len): length(len)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;Object is being created, length = &quot; &lt;&lt; len &lt;&lt; endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的语法等同于如下语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Line::Line( double len)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;Object is being created, length = &quot; &lt;&lt; len &lt;&lt; endl;</div><div class="line">    length = len;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>假设有一个类 C，具有多个字段 X、Y、Z 等需要进行初始化，同理地，您可以使用上面的语法，只需要在不同的字段使用逗号进行分隔，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C::C( double a, double b, double c): X(a), Y(b), Z(c)</div><div class="line">&#123;</div><div class="line">  ....</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="类的析构函数"><a href="#类的析构函数" class="headerlink" title="类的析构函数"></a>类的析构函数</h3><p>类的析构函数是类的一种特殊的成员函数，它会在每次删除所创建的对象时执行。</p>
+<p>析构函数的名称与类的名称是完全相同的，只是在前面加了个波浪号（~）作为前缀，它不会返回任何值，也不能带有任何参数。析构函数有助于在跳出程序（比如关闭文件、释放内存等）前释放资源。</p>
+<p>下面的实例有助于更好地理解析构函数的概念：<br>实例<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"> </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Line</span></span></div><div class="line">&#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setLength</span><span class="params">( <span class="keyword">double</span> len )</span></span>;</div><div class="line">      <span class="function"><span class="keyword">double</span> <span class="title">getLength</span><span class="params">( <span class="keyword">void</span> )</span></span>;</div><div class="line">      Line();   <span class="comment">// 这是构造函数声明</span></div><div class="line">      ~Line();  <span class="comment">// 这是析构函数声明</span></div><div class="line"> </div><div class="line">   <span class="keyword">private</span>:</div><div class="line">      <span class="keyword">double</span> length;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="comment">// 成员函数定义，包括构造函数</span></div><div class="line">Line::Line(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Object is being created"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line">Line::~Line(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Object is being deleted"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">void</span> Line::setLength( <span class="keyword">double</span> len )</div><div class="line">&#123;</div><div class="line">    length = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">double</span> Line::getLength( <span class="keyword">void</span> )</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> length;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 程序的主函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( )</span></span></div><div class="line">&#123;</div><div class="line">   Line line;</div><div class="line"> </div><div class="line">   <span class="comment">// 设置长度</span></div><div class="line">   line.setLength(<span class="number">6.0</span>); </div><div class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Length of line : "</span> &lt;&lt; line.getLength() &lt;&lt;<span class="built_in">endl</span>;</div><div class="line"> </div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object is being created</div><div class="line">Length of line : 6</div><div class="line">Object is being deleted</div></pre></td></tr></table></figure></p>
+<h2 id="1-4-C-拷贝构造函数"><a href="#1-4-C-拷贝构造函数" class="headerlink" title="1.4.C++ 拷贝构造函数"></a>1.4.C++ 拷贝构造函数</h2><p><strong>拷贝构造函数</strong>是一种特殊的构造函数，它在创建对象时，是使用同一类中之前创建的对象来初始化新创建的对象。拷贝构造函数通常用于：</p>
+<pre><code>通过使用另一个同类型的对象来初始化新创建的对象。
+
+复制对象把它作为参数传递给函数。
+
+复制对象，并从函数返回这个对象。
+</code></pre><p><strong>如果在类中没有定义拷贝构造函数，编译器会自行定义一个。</strong><br><strong>如果类带有指针变量，并有动态内存分配，则它必须有一个拷贝构造函数。</strong><br>拷贝构造函数的最常见形式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">classname (const classname &amp;obj) &#123;</div><div class="line">   // 构造函数的主体</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里，obj 是一个对象引用，该对象是用于初始化另一个对象的。<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Line</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      int getLength( void );</div><div class="line">      Line( int len );             // 简单的构造函数</div><div class="line">      Line( const Line &amp;obj);      // 拷贝构造函数</div><div class="line">      ~Line();                     // 析构函数</div><div class="line"> </div><div class="line">   private:</div><div class="line">      int *ptr;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 成员函数定义，包括构造函数</div><div class="line">Line::Line(int len)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;调用构造函数&quot; &lt;&lt; endl;</div><div class="line">    // 为指针分配内存</div><div class="line">    ptr = new int;</div><div class="line">    *ptr = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">Line::Line(const Line &amp;obj)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;调用拷贝构造函数并为指针 ptr 分配内存&quot; &lt;&lt; endl;</div><div class="line">    ptr = new int;</div><div class="line">    *ptr = *obj.ptr; // 拷贝值</div><div class="line">&#125;</div><div class="line"> </div><div class="line">Line::~Line(void)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;释放内存&quot; &lt;&lt; endl;</div><div class="line">    delete ptr;</div><div class="line">&#125;</div><div class="line">int Line::getLength( void )</div><div class="line">&#123;</div><div class="line">    return *ptr;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void display(Line obj)</div><div class="line">&#123;</div><div class="line">   cout &lt;&lt; &quot;line 大小 : &quot; &lt;&lt; obj.getLength() &lt;&lt;endl;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Line line(10);</div><div class="line"> </div><div class="line">   display(line);</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">调用构造函数</div><div class="line">调用拷贝构造函数并为指针 ptr 分配内存</div><div class="line">line 大小 : 10</div><div class="line">释放内存</div><div class="line">释放内存</div></pre></td></tr></table></figure></p>
+<p>下面的实例对上面的实例稍作修改，通过使用已有的同类型的对象来初始化新创建的对象：<br>实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Line</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      int getLength( void );</div><div class="line">      Line( int len );             // 简单的构造函数</div><div class="line">      Line( const Line &amp;obj);      // 拷贝构造函数</div><div class="line">      ~Line();                     // 析构函数</div><div class="line"> </div><div class="line">   private:</div><div class="line">      int *ptr;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">// 成员函数定义，包括构造函数</div><div class="line">Line::Line(int len)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;调用构造函数&quot; &lt;&lt; endl;</div><div class="line">    // 为指针分配内存</div><div class="line">    ptr = new int;</div><div class="line">    *ptr = len;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">Line::Line(const Line &amp;obj)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;调用拷贝构造函数并为指针 ptr 分配内存&quot; &lt;&lt; endl;</div><div class="line">    ptr = new int;</div><div class="line">    *ptr = *obj.ptr; // 拷贝值</div><div class="line">&#125;</div><div class="line"> </div><div class="line">Line::~Line(void)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;释放内存&quot; &lt;&lt; endl;</div><div class="line">    delete ptr;</div><div class="line">&#125;</div><div class="line">int Line::getLength( void )</div><div class="line">&#123;</div><div class="line">    return *ptr;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void display(Line obj)</div><div class="line">&#123;</div><div class="line">   cout &lt;&lt; &quot;line 大小 : &quot; &lt;&lt; obj.getLength() &lt;&lt;endl;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Line line1(10);</div><div class="line"> </div><div class="line">   Line line2 = line1; // 这里也调用了拷贝构造函数</div><div class="line"> </div><div class="line">   display(line1);</div><div class="line">   display(line2);</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">调用构造函数</div><div class="line">调用拷贝构造函数并为指针 ptr 分配内存</div><div class="line">调用拷贝构造函数并为指针 ptr 分配内存</div><div class="line">line 大小 : 10</div><div class="line">释放内存</div><div class="line">调用拷贝构造函数并为指针 ptr 分配内存</div><div class="line">line 大小 : 10</div><div class="line">释放内存</div><div class="line">释放内存</div><div class="line">释放内存</div></pre></td></tr></table></figure></p>
+<h2 id="1-5-C-友元函数"><a href="#1-5-C-友元函数" class="headerlink" title="1.5.C++ 友元函数"></a>1.5.C++ 友元函数</h2><p><strong>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员。</strong>尽管友元函数的原型有在类的定义中出现过，但是友元函数并不是成员函数。</p>
+<p>友元可以是一个函数，该函数被称为友元函数；友元也可以是一个类，该类被称为友元类，在这种情况下，整个类及其所有成员都是友元。</p>
+<p>如果要声明函数为一个类的友元，需要在类定义中该函数原型前使用关键字 friend，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   double width;</div><div class="line">public:</div><div class="line">   double length;</div><div class="line">   friend void printWidth( Box box );</div><div class="line">   void setWidth( double wid );</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>声明类 ClassTwo 的所有成员函数作为类 ClassOne 的友元，需要在类 ClassOne 的定义中放置如下声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">friend class ClassTwo;</div></pre></td></tr></table></figure></p>
+<p>请看下面的程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   double width;</div><div class="line">public:</div><div class="line">   friend void printWidth( Box box );</div><div class="line">   void setWidth( double wid );</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 成员函数定义</div><div class="line">void Box::setWidth( double wid )</div><div class="line">&#123;</div><div class="line">    width = wid;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 请注意：printWidth() 不是任何类的成员函数</div><div class="line">void printWidth( Box box )</div><div class="line">&#123;</div><div class="line">   /* 因为 printWidth() 是 Box 的友元，它可以直接访问该类的任何成员 */</div><div class="line">   cout &lt;&lt; &quot;Width of box : &quot; &lt;&lt; box.width &lt;&lt;endl;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line">   Box box;</div><div class="line"> </div><div class="line">   // 使用成员函数设置宽度</div><div class="line">   box.setWidth(10.0);</div><div class="line">   </div><div class="line">   // 使用友元函数输出宽度</div><div class="line">   printWidth( box );</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Width of box : 10</div></pre></td></tr></table></figure></p>
+<h2 id="1-6-C-内联函数"><a href="#1-6-C-内联函数" class="headerlink" title="1.6.C++ 内联函数"></a>1.6.C++ 内联函数</h2><p>C++ 内联函数是通常与类一起使用。如果一个函数是内联的，那么在编译时，编译器会把该函数的代码副本放置在每个调用该函数的地方。</p>
+<p>对内联函数进行任何修改，都需要重新编译函数的所有客户端，因为编译器需要重新更换一次所有的代码，否则将会继续使用旧的函数。</p>
+<p><strong>如果想把一个函数定义为内联函数，则需要在函数名前面放置关键字 inline，在调用函数之前需要对函数进行定义。</strong>如果已定义的函数多于一行，编译器会忽略 inline 限定符。</p>
+<p><strong>在类定义中的定义的函数都是内联函数，即使没有使用 inline 说明符。</strong></p>
+<p>下面是一个实例，使用内联函数来返回两个数中的最大值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"></div><div class="line">inline int Max(int x, int y)</div><div class="line">&#123;</div><div class="line">   return (x &gt; y)? x : y;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 程序的主函数</div><div class="line">int main( )</div><div class="line">&#123;</div><div class="line"></div><div class="line">   cout &lt;&lt; &quot;Max (20,10): &quot; &lt;&lt; Max(20,10) &lt;&lt; endl;</div><div class="line">   cout &lt;&lt; &quot;Max (0,200): &quot; &lt;&lt; Max(0,200) &lt;&lt; endl;</div><div class="line">   cout &lt;&lt; &quot;Max (100,1010): &quot; &lt;&lt; Max(100,1010) &lt;&lt; endl;</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Max (20,10): 20</div><div class="line">Max (0,200): 200</div><div class="line">Max (100,1010): 1010</div></pre></td></tr></table></figure></p>
+<h2 id="1-7-C-this-指针"><a href="#1-7-C-this-指针" class="headerlink" title="1.7.C++ this 指针"></a>1.7.C++ this 指针</h2><p>在 C++ 中，每一个对象都能通过 this 指针来访问自己的地址。this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象。</p>
+<p>友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针。</p>
+<p>下面的实例有助于更好地理解 this 指针的概念：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      // 构造函数定义</div><div class="line">      Box(double l=2.0, double b=2.0, double h=2.0)</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt;&quot;Constructor called.&quot; &lt;&lt; endl;</div><div class="line">         length = l;</div><div class="line">         breadth = b;</div><div class="line">         height = h;</div><div class="line">      &#125;</div><div class="line">      double Volume()</div><div class="line">      &#123;</div><div class="line">         return length * breadth * height;</div><div class="line">      &#125;</div><div class="line">      int compare(Box box)</div><div class="line">      &#123;</div><div class="line">         return this-&gt;Volume() &gt; box.Volume();</div><div class="line">      &#125;</div><div class="line">   private:</div><div class="line">      double length;     // Length of a box</div><div class="line">      double breadth;    // Breadth of a box</div><div class="line">      double height;     // Height of a box</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">   Box Box1(3.3, 1.2, 1.5);    // Declare box1</div><div class="line">   Box Box2(8.5, 6.0, 2.0);    // Declare box2</div><div class="line"></div><div class="line">   if(Box1.compare(Box2))</div><div class="line">   &#123;</div><div class="line">      cout &lt;&lt; &quot;Box2 is smaller than Box1&quot; &lt;&lt;endl;</div><div class="line">   &#125;</div><div class="line">   else</div><div class="line">   &#123;</div><div class="line">      cout &lt;&lt; &quot;Box2 is equal to or larger than Box1&quot; &lt;&lt;endl;</div><div class="line">   &#125;</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Constructor called.</div><div class="line">Constructor called.</div><div class="line">Box2 is equal to or larger than Box1</div></pre></td></tr></table></figure></p>
+<h2 id="1-8-C-指向类的指针"><a href="#1-8-C-指向类的指针" class="headerlink" title="1.8.C++ 指向类的指针"></a>1.8.C++ 指向类的指针</h2><p>一个指向 C++ 类的指针与指向结构的指针类似，访问指向类的指针的成员，需要使用成员访问运算符<code>-&gt;</code>，就像访问指向结构的指针一样。与所有的指针一样，您必须在使用指针之前，对指针进行初始化。</p>
+<p>下面的实例有助于更好地理解指向类的指针的概念：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      // 构造函数定义</div><div class="line">      Box(double l=2.0, double b=2.0, double h=2.0)</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt;&quot;Constructor called.&quot; &lt;&lt; endl;</div><div class="line">         length = l;</div><div class="line">         breadth = b;</div><div class="line">         height = h;</div><div class="line">      &#125;</div><div class="line">      double Volume()</div><div class="line">      &#123;</div><div class="line">         return length * breadth * height;</div><div class="line">      &#125;</div><div class="line">   private:</div><div class="line">      double length;     // Length of a box</div><div class="line">      double breadth;    // Breadth of a box</div><div class="line">      double height;     // Height of a box</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">   Box Box1(3.3, 1.2, 1.5);    // Declare box1</div><div class="line">   Box Box2(8.5, 6.0, 2.0);    // Declare box2</div><div class="line">   Box *ptrBox;                // Declare pointer to a class.</div><div class="line"></div><div class="line">   // 保存第一个对象的地址</div><div class="line">   ptrBox = &amp;Box1;</div><div class="line"></div><div class="line">   // 现在尝试使用成员访问运算符来访问成员</div><div class="line">   cout &lt;&lt; &quot;Volume of Box1: &quot; &lt;&lt; ptrBox-&gt;Volume() &lt;&lt; endl;</div><div class="line"></div><div class="line">   // 保存第二个对象的地址</div><div class="line">   ptrBox = &amp;Box2;</div><div class="line"></div><div class="line">   // 现在尝试使用成员访问运算符来访问成员</div><div class="line">   cout &lt;&lt; &quot;Volume of Box2: &quot; &lt;&lt; ptrBox-&gt;Volume() &lt;&lt; endl;</div><div class="line">  </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Constructor called.</div><div class="line">Constructor called.</div><div class="line">Volume of Box1: 5.94</div><div class="line">Volume of Box2: 102</div></pre></td></tr></table></figure></p>
+<h2 id="1-9-C-类的静态成员"><a href="#1-9-C-类的静态成员" class="headerlink" title="1.9.C++ 类的静态成员"></a>1.9.C++ 类的静态成员</h2><p>我们可以使用 static 关键字来把类成员定义为静态的。当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本。</p>
+<p>静态成员在类的所有对象中是共享的。如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零。我们不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化，如下面的实例所示。</p>
+<p>下面的实例有助于更好地理解静成员态数据的概念：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      static int objectCount;</div><div class="line">      // 构造函数定义</div><div class="line">      Box(double l=2.0, double b=2.0, double h=2.0)</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt;&quot;Constructor called.&quot; &lt;&lt; endl;</div><div class="line">         length = l;</div><div class="line">         breadth = b;</div><div class="line">         height = h;</div><div class="line">         // 每次创建对象时增加 1</div><div class="line">         objectCount++;</div><div class="line">      &#125;</div><div class="line">      double Volume()</div><div class="line">      &#123;</div><div class="line">         return length * breadth * height;</div><div class="line">      &#125;</div><div class="line">   private:</div><div class="line">      double length;     // 长度</div><div class="line">      double breadth;    // 宽度</div><div class="line">      double height;     // 高度</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 初始化类 Box 的静态成员</div><div class="line">int Box::objectCount = 0;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">   Box Box1(3.3, 1.2, 1.5);    // 声明 box1</div><div class="line">   Box Box2(8.5, 6.0, 2.0);    // 声明 box2</div><div class="line"></div><div class="line">   // 输出对象的总数</div><div class="line">   cout &lt;&lt; &quot;Total objects: &quot; &lt;&lt; Box::objectCount &lt;&lt; endl;</div><div class="line"></div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Constructor called.</div><div class="line">Constructor called.</div><div class="line">Total objects: 2</div></pre></td></tr></table></figure></p>
+<h4 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数"></a>静态成员函数</h4><p>如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符<code>::</code> 就可以访问。</p>
+<p>静态成员函数只能访问静态成员数据、其他静态成员函数和类外部的其他函数。</p>
+<p>静态成员函数有一个类范围，他们不能访问类的 this 指针。您可以使用静态成员函数来判断类的某些对象是否已被创建。</p>
+<blockquote>
+<p>   静态成员函数与普通成员函数的区别：</p>
+<pre><code>静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数）。
+
+普通成员函数有 this 指针，可以访问类中的任意成员；而静态成员函数没有 this 指针。
+</code></pre></blockquote>
+<p>下面的实例有助于更好地理解静态成员函数的概念：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Box</div><div class="line">&#123;</div><div class="line">   public:</div><div class="line">      static int objectCount;</div><div class="line">      // 构造函数定义</div><div class="line">      Box(double l=2.0, double b=2.0, double h=2.0)</div><div class="line">      &#123;</div><div class="line">         cout &lt;&lt;&quot;Constructor called.&quot; &lt;&lt; endl;</div><div class="line">         length = l;</div><div class="line">         breadth = b;</div><div class="line">         height = h;</div><div class="line">         // 每次创建对象时增加 1</div><div class="line">         objectCount++;</div><div class="line">      &#125;</div><div class="line">      double Volume()</div><div class="line">      &#123;</div><div class="line">         return length * breadth * height;</div><div class="line">      &#125;</div><div class="line">      static int getCount()</div><div class="line">      &#123;</div><div class="line">         return objectCount;</div><div class="line">      &#125;</div><div class="line">   private:</div><div class="line">      double length;     // 长度</div><div class="line">      double breadth;    // 宽度</div><div class="line">      double height;     // 高度</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 初始化类 Box 的静态成员</div><div class="line">int Box::objectCount = 0;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">  </div><div class="line">   // 在创建对象之前输出对象的总数</div><div class="line">   cout &lt;&lt; &quot;Inital Stage Count: &quot; &lt;&lt; Box::getCount() &lt;&lt; endl;</div><div class="line"></div><div class="line">   Box Box1(3.3, 1.2, 1.5);    // 声明 box1</div><div class="line">   Box Box2(8.5, 6.0, 2.0);    // 声明 box2</div><div class="line"></div><div class="line">   // 在创建对象之后输出对象的总数</div><div class="line">   cout &lt;&lt; &quot;Final Stage Count: &quot; &lt;&lt; Box::getCount() &lt;&lt; endl;</div><div class="line"></div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Inital Stage Count: 0</div><div class="line">Constructor called.</div><div class="line">Constructor called.</div><div class="line">Final Stage Count: 2</div></pre></td></tr></table></figure></p>
+<p>转自：<a href="http://www.runoob.com/cplusplus/cpp-classes-objects.html" target="_blank" rel="external">c++类&amp;对象|菜鸟教程</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/c++笔记/c++笔记：（2）/" rel="next" title="c++笔记：（2）">
+                <i class="fa fa-chevron-left"></i> c++笔记：（2）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/c++笔记/c++笔记：（4）C++ 继承/" rel="prev" title="c++笔记：（4）:C++ 继承">
+                c++笔记：（4）:C++ 继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/favicon.ico.png"
+               alt="熊的猫" />
+          <p class="site-author-name" itemprop="name">熊的猫</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是“熊的猫”的博客，在这里，将记录我的学习历程。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiongdemao" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://translate.google.cn/" title="谷歌翻译" target="_blank">谷歌翻译</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-C-类-amp-对象"><span class="nav-number">1.</span> <span class="nav-text">1.C++ 类 & 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-类定义"><span class="nav-number">1.1.</span> <span class="nav-text">C++ 类定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义-C-对象"><span class="nav-number">1.2.</span> <span class="nav-text">定义 C++ 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问数据成员"><span class="nav-number">1.3.</span> <span class="nav-text">访问数据成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1C-类成员函数"><span class="nav-number">1.4.</span> <span class="nav-text">1.1C++ 类成员函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2C-类访问修饰符"><span class="nav-number">1.5.</span> <span class="nav-text">1.2C++ 类访问修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公有（public）成员"><span class="nav-number">1.5.1.</span> <span class="nav-text">公有（public）成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有（private）成员"><span class="nav-number">1.5.2.</span> <span class="nav-text">私有（private）成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保护（protected）成员"><span class="nav-number">1.5.3.</span> <span class="nav-text">保护（protected）成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承中的特点"><span class="nav-number">1.5.4.</span> <span class="nav-text">继承中的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-继承"><span class="nav-number">1.5.5.</span> <span class="nav-text">public 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protected-继承"><span class="nav-number">1.5.6.</span> <span class="nav-text">protected 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#private-继承"><span class="nav-number">1.5.7.</span> <span class="nav-text">private 继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3C-类构造函数-amp-析构函数"><span class="nav-number">1.6.</span> <span class="nav-text">1.3C++ 类构造函数 & 析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的构造函数"><span class="nav-number">1.6.1.</span> <span class="nav-text">类的构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带参数的构造函数"><span class="nav-number">1.6.2.</span> <span class="nav-text">带参数的构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用初始化列表来初始化字段"><span class="nav-number">1.6.3.</span> <span class="nav-text">使用初始化列表来初始化字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的析构函数"><span class="nav-number">1.6.4.</span> <span class="nav-text">类的析构函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-C-拷贝构造函数"><span class="nav-number">1.7.</span> <span class="nav-text">1.4.C++ 拷贝构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-C-友元函数"><span class="nav-number">1.8.</span> <span class="nav-text">1.5.C++ 友元函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-C-内联函数"><span class="nav-number">1.9.</span> <span class="nav-text">1.6.C++ 内联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-C-this-指针"><span class="nav-number">1.10.</span> <span class="nav-text">1.7.C++ this 指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-C-指向类的指针"><span class="nav-number">1.11.</span> <span class="nav-text">1.8.C++ 指向类的指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-C-类的静态成员"><span class="nav-number">1.12.</span> <span class="nav-text">1.9.C++ 类的静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态成员函数"><span class="nav-number">1.12.0.1.</span> <span class="nav-text">静态成员函数</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">熊的猫</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    &nbsp|&nbsp本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  &nbsp|&nbsp本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xiongdemao.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/';
+          this.page.identifier = '2017/11/13/c++笔记/c++笔记：（3）C++ 类 & 对象/';
+          this.page.title = 'c++笔记：（3）:C++ 类 & 对象';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xiongdemao.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

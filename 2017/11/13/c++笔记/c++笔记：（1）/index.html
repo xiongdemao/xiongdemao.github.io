@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="加油，小伙儿" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.C++ 指针运算符（&amp;amp; 和 *）1234567891011121314151617181920212223#include &amp;lt;iostream&amp;gt; using namespace std; int main ()&amp;#123;   int  var;   int  *ptr;   int  val;   var = 3000;   // 获取 var 的地址   ptr = &amp;">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++笔记：（1）">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（1）/index.html">
+<meta property="og:site_name" content="加油，小伙儿">
+<meta property="og:description" content="1.C++ 指针运算符（&amp;amp; 和 *）1234567891011121314151617181920212223#include &amp;lt;iostream&amp;gt; using namespace std; int main ()&amp;#123;   int  var;   int  *ptr;   int  val;   var = 3000;   // 获取 var 的地址   ptr = &amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-02-19T13:32:12.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++笔记：（1）">
+<meta name="twitter:description" content="1.C++ 指针运算符（&amp;amp; 和 *）1234567891011121314151617181920212223#include &amp;lt;iostream&amp;gt; using namespace std; int main ()&amp;#123;   int  var;   int  *ptr;   int  val;   var = 3000;   // 获取 var 的地址   ptr = &amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（1）/"/>
+
+
+
+
+
+  <title>c++笔记：（1） | 加油，小伙儿</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">加油，小伙儿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/c++笔记/c++笔记：（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="熊的猫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.ico.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="加油，小伙儿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c++笔记：（1）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T21:08:56+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/13/c++笔记/c++笔记：（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/13/c++笔记/c++笔记：（1）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-C-指针运算符（-amp-和-）"><a href="#1-C-指针运算符（-amp-和-）" class="headerlink" title="1.C++ 指针运算符（&amp; 和 *）"></a>1.C++ 指针运算符（&amp; 和 *）</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"> </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="keyword">int</span>  var;</div><div class="line">   <span class="keyword">int</span>  *ptr;</div><div class="line">   <span class="keyword">int</span>  val;</div><div class="line"></div><div class="line">   var = <span class="number">3000</span>;</div><div class="line"></div><div class="line">   <span class="comment">// 获取 var 的地址</span></div><div class="line">   ptr = &amp;var;</div><div class="line"></div><div class="line">   <span class="comment">// 获取 ptr 的值</span></div><div class="line">   val = *ptr;</div><div class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of var :"</span> &lt;&lt; var &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of ptr :"</span> &lt;&lt; ptr &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of val :"</span> &lt;&lt; val &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Value of var :<span class="number">3000</span></div><div class="line">Value of ptr :<span class="number">0xbff64494</span></div><div class="line">Value of val :<span class="number">3000</span></div></pre></td></tr></table></figure></p>
+<h1 id="2-无限循环"><a href="#2-无限循环" class="headerlink" title="2.无限循环"></a>2.无限循环</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line"> </div><div class="line">   for( ; ; )</div><div class="line">   &#123;</div><div class="line">      printf(&quot;This loop will run forever.\n&quot;);</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：您可以按 Ctrl + C 键终止一个无限循环。</p>
+<h1 id="3-C-随机数"><a href="#3-C-随机数" class="headerlink" title="3.C++ 随机数"></a>3.C++ 随机数</h1><p>在许多情况下，需要生成随机数。关于随机数生成器，有两个相关的函数。一个是 rand()，该函数只返回一个伪随机数。生成随机数之前必须先调用 srand() 函数。</p>
+<p>下面是一个关于生成随机数的简单实例。实例中使用了 time() 函数来获取系统时间的秒数，通过调用 rand() 函数来生成随机数：<br>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;time.h&gt; /*用到了time函数，所以要有这个头文件*/</div><div class="line">#define MAX 10</div><div class="line"> </div><div class="line">int main( void)</div><div class="line">&#123;</div><div class="line">    int number[MAX] = &#123;0&#125;;</div><div class="line">    int i;</div><div class="line">    srand((unsigned) time(NULL)); /*播种子*/</div><div class="line">    for(i = 0; i &lt; MAX; i++)</div><div class="line">    &#123;</div><div class="line">        number[i] = rand() % 100; /*产生100以内的随机整数*/</div><div class="line">        printf(&quot;%d &quot;, number[i]);</div><div class="line">    &#125;</div><div class="line">    printf(&quot;\n&quot;);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">36 32 0 2 45 89 48 73 93 79 </div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure>
+<h1 id="4-关于“using-namespace-std”"><a href="#4-关于“using-namespace-std”" class="headerlink" title="4.关于“using namespace std”"></a>4.关于“using namespace std”</h1><p>　对于一个存在着标准输入输出的C++控制台程序，一般会在#include <iostream>的下一行发现一句话，using namespace std。这句话其实就表示了所有的标准库函数都在标准命名空间std中进行了定义。其作用就在于避免发生重命名的问题。<br>　　1. 关于namespace<br>　　C++引入了命名空间namespace主要解决了多个程序员在编写同一个项目中可能出现的函数等重名的现象。解决方法就是加上自己的命名空间。比如下面的例子：</iostream></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">namespace ZhangSan</div><div class="line">&#123;</div><div class="line">    int a=10; //张三把10赋值给了变量a</div><div class="line">&#125;</div><div class="line">namespace LiSi</div><div class="line">&#123;</div><div class="line">    int a=5; //李四把10赋值给了变量a</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">    int a=1;</div><div class="line">    cout&lt;&lt;&quot;张三定义的a=&quot;&lt;&lt;ZhangSan::a&lt;&lt;endl;</div><div class="line">    cout&lt;&lt;&quot;李四定义的a=&quot;&lt;&lt;LiSi::a&lt;&lt;endl;</div><div class="line">    cout&lt;&lt;&quot;主函数定义的a=&quot;&lt;&lt;a&lt;&lt;endl;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">张三定义的a=10</div><div class="line">李四定义的a=5</div><div class="line">主函数定义的a=1</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure></p>
+<p>　　上例中的“ZhangSan::a”和“LiSi::a”分别表示了调用张三命名空间中的a变量和李四命名空间中的a变量。这样的好处显而易见，那就是虽然张三和李四这两个程序员都定义了一个变量a，但是并不会出现重名的危险。</p>
+<h1 id="5-include-lt-iostream-gt-和-include-lt-iostream-h-gt-的区别"><a href="#5-include-lt-iostream-gt-和-include-lt-iostream-h-gt-的区别" class="headerlink" title="5.#include&lt;iostream&gt;和#include&lt;iostream.h&gt;的区别"></a>5.<code>#include&lt;iostream&gt;</code>和<code>#include&lt;iostream.h&gt;</code>的区别</h1><p>　　区别在于：如果用了isotream则一定要引入命名空间，即”using namespace std;<br>　　<br>    　　如果用了iostream.h，则不能引入命名空间，否则会引起编译错误，提示找不到命名空间. </p>
+<p>例程如下：</p>
+<p>情况一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//情况一：使用&lt;iostream&gt;和命名空间 </div><div class="line"> #include  &lt;iostream&gt; </div><div class="line"> using  namespace  std; </div><div class="line"> int main() </div><div class="line"> &#123; </div><div class="line">    cout&lt;&lt;&quot;&lt;iostream&gt;  need  to  use  namespace  std!\n&quot;; </div><div class="line">    return  0; </div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;iostream&gt;  need  to  use  namespace  std! </div><div class="line"> Press  any  key  to  continue</div></pre></td></tr></table></figure></p>
+<p>情况二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//情况二：使用&lt;iostream.h&gt;，不引入命名空间 </div><div class="line">  #include  &lt;iostream.h&gt; </div><div class="line">  //using  namespace  std; </div><div class="line">  int  main() </div><div class="line">  &#123; </div><div class="line">      cout&lt;&lt;&quot;&lt;iostream&gt;  need  to  use  namespace  std!\n&quot;; </div><div class="line">      return  0; </div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;iostream&gt;  need  to  use  namespace  std! </div><div class="line"> Press  any  key  to  continue</div></pre></td></tr></table></figure></p>
+<p>情况三：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//情况三：使用&lt;iostream.h&gt;，引入命名空间，这时候编译出错 </div><div class="line">#include  &lt;iostream.h&gt; </div><div class="line">using  namespace  std; </div><div class="line">int  main() </div><div class="line">&#123; </div><div class="line">   cout&lt;&lt;&quot;&lt;iostream&gt;  need  to  use  namespace  std!\n&quot;; </div><div class="line">   return  0; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">  error  C2871:  &apos;std&apos;  :  does  not  exist  or  is  not  a  namespace </div><div class="line">```    　　</div><div class="line"></div><div class="line">　　转自：http://blog.csdn.net/jzjwonderful/article/details/47866773</div><div class="line">　　</div><div class="line"></div><div class="line"></div><div class="line"># 6.C++ 数组</div><div class="line"></div><div class="line"></div><div class="line">C++ 支持数组数据结构，它可以存储一个固定大小的相同类型元素的顺序集合。数组是用来存储一系列数据，但它往往被认为是一系列相同类型的变量。</div></pre></td></tr></table></figure>
+<p>#include <iostream><br>using namespace std;</iostream></p>
+<p>#include <iomanip><br>/<em>主要是对cin,cout之类的一些操纵运算子，比如setfill,setw,setbase,setprecision等等。它是I/O流控制头文</em>/</iomanip></p>
+<p>using std::setw;    /<em> setw(n) 设域宽为n个字符 </em>/</p>
+<p>int main ()<br>{<br>   int n[ 10 ]; // n 是一个包含 10 个整数的数组</p>
+<p>   // 初始化数组元素<br>   for ( int i = 0; i &lt; 10; i++ )<br>   {<br>      n[ i ] = i + 100; // 设置元素 i 为 i + 100<br>   }<br>   cout &lt;&lt; “Element” &lt;&lt; setw( 13 ) &lt;&lt; “Value” &lt;&lt; endl;</p>
+<p>   // 输出数组中每个元素的值<br>   for ( int j = 0; j &lt; 10; j++ )<br>   {<br>      cout &lt;&lt; setw( 7 )&lt;&lt; j &lt;&lt; setw( 13 ) &lt;&lt; n[ j ] &lt;&lt; endl;<br>   }</p>
+<p>   return 0;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">输出：</div></pre></td></tr></table></figure></p>
+<p>正在启动：/home/kuo/projects/test/build/test<br>Element        Value<br>      0          100<br>      1          101<br>      2          102<br>      3          103<br>      4          104<br>      5          105<br>      6          106<br>      7          107<br>      8          108<br>      9          109<br><strong><em> 正常退出 </em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## ６.1 C++ 多维数组</div></pre></td></tr></table></figure></p>
+<p>#include <iostream><br>using namespace std;</iostream></p>
+<p>int main ()<br>{<br>   // 一个带有 5 行 2 列的数组<br>   int a[5][2] = { {0,0}, {1,2}, {2,4}, {3,6},{4,8}};</p>
+<p>   // 输出数组中每个元素的值<br>   for ( int i = 0; i &lt; 5; i++ )<br>      for ( int j = 0; j &lt; 2; j++ )<br>      {<br>         cout &lt;&lt; “a[“ &lt;&lt; i &lt;&lt; “][“ &lt;&lt; j &lt;&lt; “]: “;<br>         cout &lt;&lt; a[i][j]&lt;&lt; endl;<br>      }</p>
+<p>   return 0;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">```c++</div><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">a[0][0]: 0</div><div class="line">a[0][1]: 0</div><div class="line">a[1][0]: 1</div><div class="line">a[1][1]: 2</div><div class="line">a[2][0]: 2</div><div class="line">a[2][1]: 4</div><div class="line">a[3][0]: 3</div><div class="line">a[3][1]: 6</div><div class="line">a[4][0]: 4</div><div class="line">a[4][1]: 8</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure></p>
+<h2 id="6-2-C-指向数组的指针"><a href="#6-2-C-指向数组的指针" class="headerlink" title="6.2 C++ 指向数组的指针"></a>6.2 C++ 指向数组的指针</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">   // 带有 5 个元素的整型数组</div><div class="line">   double balance[5] = &#123;1000.0, 2.0, 3.4, 17.0, 50.0&#125;;</div><div class="line">   double *p;  /*double *[p] 的意思是定义双精度指针变量p */</div><div class="line"></div><div class="line">   p = balance;    /*因为balance既是数组变量，也是指向数组第0个元素的指针变量*/</div><div class="line"> </div><div class="line">   // 输出数组中每个元素的值</div><div class="line">   cout &lt;&lt; &quot;使用指针的数组值 &quot; &lt;&lt; endl; </div><div class="line">   for ( int i = 0; i &lt; 5; i++ )</div><div class="line">   &#123;</div><div class="line">       cout &lt;&lt; &quot;*(p + &quot; &lt;&lt; i &lt;&lt; &quot;) : &quot;;</div><div class="line">       cout &lt;&lt; *(p + i) &lt;&lt; endl;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   cout &lt;&lt; &quot;使用 balance 作为地址的数组值 &quot; &lt;&lt; endl;</div><div class="line">   for ( int i = 0; i &lt; 5; i++ )</div><div class="line">   &#123;</div><div class="line">       cout &lt;&lt; &quot;*(balance + &quot; &lt;&lt; i &lt;&lt; &quot;) : &quot;;</div><div class="line">       cout &lt;&lt; *(balance + i) &lt;&lt; endl;</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">使用指针的数组值 </div><div class="line">*(p + 0) : 1000</div><div class="line">*(p + 1) : 2</div><div class="line">*(p + 2) : 3.4</div><div class="line">*(p + 3) : 17</div><div class="line">*(p + 4) : 50</div><div class="line">使用 balance 作为地址的数组值 </div><div class="line">*(balance + 0) : 1000</div><div class="line">*(balance + 1) : 2</div><div class="line">*(balance + 2) : 3.4</div><div class="line">*(balance + 3) : 17</div><div class="line">*(balance + 4) : 50</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure></p>
+<h2 id="6-3-C-传递数组给函数"><a href="#6-3-C-传递数组给函数" class="headerlink" title="6.3 C++ 传递数组给函数"></a>6.3 C++ 传递数组给函数</h2><p>C++ 不允许向函数传递一个完整的数组作为参数，但是，您可以通过指定不带索引的数组名来传递一个指向数组的指针。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">// 函数声明</div><div class="line">double getAverage(int arr[], int size);</div><div class="line"></div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">   // 带有 5 个元素的整型数组</div><div class="line">   int balance[5] = &#123;1000, 2, 3, 17, 50&#125;;</div><div class="line">   double avg;</div><div class="line"></div><div class="line">   // 传递一个指向数组的指针作为参数</div><div class="line">   avg = getAverage( balance, 5 ) ;</div><div class="line"> </div><div class="line">   // 输出返回值</div><div class="line">   cout &lt;&lt; &quot;平均值是：&quot; &lt;&lt; avg &lt;&lt; endl; </div><div class="line">    </div><div class="line">   return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//子函数：应用于求数组的指定元素的平均值；</div><div class="line">double getAverage(int arr[], int size)	//传递数组的首地址和个数</div><div class="line">//还可以以这样的形式：void myFunction(int *param)</div><div class="line">&#123;</div><div class="line">  int    i, sum = 0;       </div><div class="line">  double avg;          </div><div class="line"></div><div class="line">  for (i = 0; i &lt; size; ++i)</div><div class="line">  &#123;</div><div class="line">    sum += arr[i];</div><div class="line">   &#125;</div><div class="line"></div><div class="line">  avg = double(sum) / size;</div><div class="line"></div><div class="line">  return avg;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">平均值是：214.4</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure></p>
+<h2 id="6-4-C-从函数返回数组"><a href="#6-4-C-从函数返回数组" class="headerlink" title="6.4 C++ 从函数返回数组"></a>6.4 C++ 从函数返回数组</h2><p>C++ 不允许返回一个完整的数组作为函数的参数。但是，您可以通过指定不带索引的数组名来返回一个指向数组的指针。</p>
+<p>如果您想要从函数返回一个一维数组，您必须声明一个返回指针的函数，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int * myFunction()</div><div class="line">&#123;</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另外，C++ 不支持在函数外返回局部变量的地址，除非定义局部变量为 static 变量。</p>
+<p>现在，让我们来看下面的函数，它会生成 10 个随机数，并使用数组来返回它们，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">// 要生成和返回随机数的函数</div><div class="line">int * getRandom( )/*如果您想要从函数返回一个一维数组，您必须声明一个返回指针的函数*/</div><div class="line">&#123;</div><div class="line">  static int  r[10];/*C++ 不支持在函数外返回局部变量的地址，除非定义局部变量为 static 变量。*/</div><div class="line"> </div><div class="line">  // 设置种子</div><div class="line">  srand( (unsigned)time( NULL ) );</div><div class="line">  for (int i = 0; i &lt; 10; ++i)</div><div class="line">  &#123;</div><div class="line">    r[i] = rand();</div><div class="line">    cout &lt;&lt; r[i] &lt;&lt; endl;</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  return r;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 要调用上面定义函数的主函数</div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">   // 一个指向整数的指针</div><div class="line">   int *p;</div><div class="line"> </div><div class="line">   p = getRandom();</div><div class="line">   for ( int i = 0; i &lt; 10; i++ )</div><div class="line">   &#123;</div><div class="line">       cout &lt;&lt; &quot;*(p + &quot; &lt;&lt; i &lt;&lt; &quot;) : &quot;;</div><div class="line">       cout &lt;&lt; *(p + i) &lt;&lt; endl;</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">1643684660</div><div class="line">555897083</div><div class="line">1283025333</div><div class="line">67400210</div><div class="line">154404676</div><div class="line">2092591326</div><div class="line">1876825200</div><div class="line">1608593253</div><div class="line">1393148894</div><div class="line">621522198</div><div class="line">*(p + 0) : 1643684660</div><div class="line">*(p + 1) : 555897083</div><div class="line">*(p + 2) : 1283025333</div><div class="line">*(p + 3) : 67400210</div><div class="line">*(p + 4) : 154404676</div><div class="line">*(p + 5) : 2092591326</div><div class="line">*(p + 6) : 1876825200</div><div class="line">*(p + 7) : 1608593253</div><div class="line">*(p + 8) : 1393148894</div><div class="line">*(p + 9) : 621522198</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure></p>
+<h1 id="7-C-字符串"><a href="#7-C-字符串" class="headerlink" title="7.C++ 字符串"></a>7.C++ 字符串</h1><p>C++ 提供了以下两种类型的字符串表示形式：</p>
+<pre><code>C 风格字符串
+C++ 引入的 string 类类型
+</code></pre><h2 id="7-1-C-风格字符串"><a href="#7-1-C-风格字符串" class="headerlink" title="7.1 C 风格字符串"></a>7.1 C 风格字符串</h2><p>C 风格的字符串起源于 C 语言，并在 C++ 中继续得到支持。字符串实际上是使用 null 字符 ‘\0’ 终止的一维字符数组。因此，一个以 null 结尾的字符串，包含了组成字符串的字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">   char str1[11] = &quot;Hello&quot;;</div><div class="line">   char str2[11] = &quot;World&quot;;</div><div class="line">   char str3[11];</div><div class="line">   int  len ;</div><div class="line"> </div><div class="line">   // 复制 str1 到 str3</div><div class="line">   strcpy( str3, str1);</div><div class="line">   cout &lt;&lt; &quot;strcpy( str3, str1) : &quot; &lt;&lt; str3 &lt;&lt; endl;</div><div class="line"> </div><div class="line">   // 连接 str1 和 str2</div><div class="line">   strcat( str1, str2);</div><div class="line">   cout &lt;&lt; &quot;strcat( str1, str2): &quot; &lt;&lt; str1 &lt;&lt; endl;</div><div class="line"> </div><div class="line">   // 连接后，str1 的总长度</div><div class="line">   len = strlen(str1);</div><div class="line">   cout &lt;&lt; &quot;strlen(str1) : &quot; &lt;&lt; len &lt;&lt; endl;</div><div class="line"> </div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">strcpy( str3, str1) : Hello</div><div class="line">strcat( str1, str2): HelloWorld</div><div class="line">strlen(str1) : 10</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure>
+<p>其他：<br>|—|—|—|<br>| - - -  |  : - - - : |  - - -  |<br>| 4    | strcmp(s1,s2); |如果 s1 和 s2 是相同的，则返回 0；如果 s1 &lt; s2 则返回小于 0；如果 s1&gt;s2 则返回大于 0。 |<br>| 5     | strchr(s1, ch); | 返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。 |<br>|6    | strstr(s1, s2); |返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。|</p>
+<h2 id="7-2-C-中的-String-类"><a href="#7-2-C-中的-String-类" class="headerlink" title="7.2 C++ 中的 String 类"></a>7.2 C++ 中的 String 类</h2><p>C++ 标准库提供了 string 类类型，支持上述所有的操作，另外还增加了其他更多的功能。我们将学习 C++ 标准库中的这个类，现在让我们先来看看下面这个实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    //定义一个string类对象</div><div class="line">    string http = &quot;www.runoob.com&quot;;</div><div class="line"></div><div class="line">   //打印字符串长度</div><div class="line">   cout&lt;&lt;http.length()&lt;&lt;endl;</div><div class="line"></div><div class="line">    //拼接</div><div class="line">    http.append(&quot;/C++&quot;);</div><div class="line">    cout&lt;&lt;http&lt;&lt;endl; //打印结果为：www.runoob.com/C++</div><div class="line"></div><div class="line">    //删除</div><div class="line">    int pos = http.find(&quot;/C++&quot;); //查找&quot;C++&quot;在字符串中的位置</div><div class="line">    cout&lt;&lt;pos&lt;&lt;endl;</div><div class="line">    http.replace(pos, 4, &quot;&quot;);   //从位置pos开始，之后的4个字符替换为空，即删除</div><div class="line">    cout&lt;&lt;http&lt;&lt;endl;</div><div class="line"></div><div class="line">    //找子串runoob</div><div class="line">    int first = http.find_first_of(&quot;.&quot;); //从头开始寻找字符&apos;.&apos;的位置</div><div class="line">    int last = http.find_last_of(&quot;.&quot;);   //从尾开始寻找字符&apos;.&apos;的位置</div><div class="line">    cout&lt;&lt;http.substr(first+1, last-first-1)&lt;&lt;endl; //提取&quot;runoob&quot;子串并打印</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">正在启动：/home/kuo/projects/test/build/test</div><div class="line">14</div><div class="line">www.runoob.com/C++</div><div class="line">14</div><div class="line">www.runoob.com</div><div class="line">runoob</div><div class="line">*** 正常退出 ***</div></pre></td></tr></table></figure>
+<p>转自：<a href="http://www.runoob.com/cplusplus/cpp-strings.html" target="_blank" rel="external">http://www.runoob.com/cplusplus/cpp-strings.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/ros/rosb笔记：bug时间：环境变量设置问题——“解决 roscd beginner_tutorials 没有此文件的问题”/" rel="next" title="rosb笔记：bug时间：环境变量设置问题——“解决 roscd beginner_tutorials 没有此文件的问题”">
+                <i class="fa fa-chevron-left"></i> rosb笔记：bug时间：环境变量设置问题——“解决 roscd beginner_tutorials 没有此文件的问题”
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/c++笔记/c++笔记：（2）/" rel="prev" title="c++笔记：（2）">
+                c++笔记：（2） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/favicon.ico.png"
+               alt="熊的猫" />
+          <p class="site-author-name" itemprop="name">熊的猫</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是“熊的猫”的博客，在这里，将记录我的学习历程。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiongdemao" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://translate.google.cn/" title="谷歌翻译" target="_blank">谷歌翻译</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-C-指针运算符（-amp-和-）"><span class="nav-number">1.</span> <span class="nav-text">1.C++ 指针运算符（& 和 *）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-无限循环"><span class="nav-number">2.</span> <span class="nav-text">2.无限循环</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-C-随机数"><span class="nav-number">3.</span> <span class="nav-text">3.C++ 随机数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-关于“using-namespace-std”"><span class="nav-number">4.</span> <span class="nav-text">4.关于“using namespace std”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-include-lt-iostream-gt-和-include-lt-iostream-h-gt-的区别"><span class="nav-number">5.</span> <span class="nav-text">5.#include<iostream>和#include<iostream.h>的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-C-指向数组的指针"><span class="nav-number">5.1.</span> <span class="nav-text">6.2 C++ 指向数组的指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-C-传递数组给函数"><span class="nav-number">5.2.</span> <span class="nav-text">6.3 C++ 传递数组给函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-C-从函数返回数组"><span class="nav-number">5.3.</span> <span class="nav-text">6.4 C++ 从函数返回数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-C-字符串"><span class="nav-number">6.</span> <span class="nav-text">7.C++ 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-C-风格字符串"><span class="nav-number">6.1.</span> <span class="nav-text">7.1 C 风格字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-C-中的-String-类"><span class="nav-number">6.2.</span> <span class="nav-text">7.2 C++ 中的 String 类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">熊的猫</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    &nbsp|&nbsp本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  &nbsp|&nbsp本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xiongdemao.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/13/c++笔记/c++笔记：（1）/';
+          this.page.identifier = '2017/11/13/c++笔记/c++笔记：（1）/';
+          this.page.title = 'c++笔记：（1）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xiongdemao.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
